@@ -1,0 +1,24 @@
+{
+  "name": "alimento",
+  "version": "1.0.0",
+  "description": "Alimento - A Feed Reader Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luizcanet/alimento.git"
+  },
+  "keywords": [
+    "feed",
+    "reader",
+    "rss"
+  ],
+  "author": "Luiz Henrique Canet Filho <me@luizca.net>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/luizcanet/alimento/issues"
+  },
+  "homepage": "https://github.com/luizcanet/alimento#readme"
+}
