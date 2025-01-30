@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Alimento - A Feed Reader Application",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "lint": "eslint",
     "test": "nyc mocha",
@@ -25,8 +26,10 @@
   "homepage": "https://github.com/luizcanet/alimento#readme",
   "devDependencies": {
     "@eslint/js": "^9.19.0",
+    "chai": "^5.1.2",
     "coveralls": "^3.1.1",
     "eslint": "^9.19.0",
+    "eslint-plugin-mocha": "^10.5.0",
     "esm": "^3.2.25",
     "globals": "^15.14.0",
     "jsdom-global": "^3.0.2",
@@ -38,12 +41,20 @@
     "require": [
       "esm",
       "jsdom-global/register"
+    ],
+    "recursive": true,
+    "extension": [
+      "js"
     ]
   },
   "nyc": {
     "reporter": [
       "lcov",
       "text"
+    ],
+    "all": true,
+    "include": [
+      "src/**/*.js"
     ]
   }
 }
