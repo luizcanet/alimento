@@ -15,12 +15,12 @@ class Feed {
     image
 
     constructor (title, link, description) {
-        this.#feedTitle = title
-        this.#feedLink = link
-        this.#feedDescription = description
+        this.#title = title
+        this.#link = link
+        this.#description = description
     }
 
-    set #feedTitle(title) {
+    set #title(title) {
         if (typeof title !== 'string') {
             throw new TypeError('Title must be a string')
         }
@@ -28,17 +28,17 @@ class Feed {
         this.title = title
     }
 
-    set #feedLink(link) {
+    set #link(link) {
         try {
             new URL(link)
-        } catch (error) {
+        } catch {
             throw new TypeError('Link must be a valid URL')
         }
 
         this.link = link
     }
 
-    set #feedDescription(description) {
+    set #description(description) {
         if (typeof description !== 'string') {
             throw new TypeError('Description must be a string')
         }
