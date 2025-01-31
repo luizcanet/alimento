@@ -3,13 +3,13 @@ import FeedItem from '../../src/Models/FeedItem.js'
 
 describe('Feed Item Model', function () {
     it('Should throw a TypeError when the link parameter is not a URL', function () {
-        let feed = () => { new FeedItem() }
+        const feed = () => { new FeedItem() }
 
         expect(feed).to.throw(TypeError, 'Feed Link must be a valid URL')
     })
 
     it('Should build a complete Feed Item', function () {
-        let feedItem = new FeedItem('https://test/url')
+        const feedItem = new FeedItem('https://test/url')
 
         feedItem.title = 'Venice Film Festival Tries to Quit Sinking'
         feedItem.link = 'http://nytimes.com/2004/12/07FEST.html'
@@ -27,8 +27,8 @@ describe('Feed Item Model', function () {
         feedItem.pubDate = 'Sun, 19 May 2002 15:21:36 GMT'
 
         expect(feedItem).to.be.an.instanceOf(FeedItem)
+        expect(feedItem.feedLink).to.be.equal('https://test/url')
         expect(feedItem).to.be.eql({
-            feedLink: 'https://test/url',
             title: 'Venice Film Festival Tries to Quit Sinking',
             link: 'http://nytimes.com/2004/12/07FEST.html',
             description: 'Some of the most heated chatter at the Venice Film Festival this week was about the way that the arrival of the stars at the Palazzo del Cinema was being staged.',

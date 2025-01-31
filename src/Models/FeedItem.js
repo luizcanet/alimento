@@ -1,5 +1,5 @@
 class FeedItem {
-    feedLink
+    #feedLink
     title
     link
     description
@@ -11,17 +11,21 @@ class FeedItem {
     pubDate
 
     constructor (feedLink) {
-        this.#feedLink = feedLink
+        this.feedLink = feedLink
     }
 
-    set #feedLink(feedLink) {
+    set feedLink(feedLink) {
         try {
             new URL(feedLink)
         } catch {
             throw new TypeError('Feed Link must be a valid URL')
         }
 
-        this.feedLink = feedLink
+        this.#feedLink = feedLink
+    }
+
+    get feedLink() {
+        return this.#feedLink
     }
 }
 

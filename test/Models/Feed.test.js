@@ -3,25 +3,25 @@ import Feed from '../../src/Models/Feed.js';
 
 describe('Feed Model', function() {
     it('Should throw a TypeError when the title parameter is not a string', function () {
-        let feed = () => { new Feed() }
+        const feed = () => { new Feed() }
 
         expect(feed).to.throw(TypeError, 'Title must be a string')
     })
 
     it('Should throw a TypeError when the link parameter is not a URL', function () {
-        let feed = () => { new Feed('Test Title') }
+        const feed = () => { new Feed('Test Title') }
 
         expect(feed).to.throw(TypeError, 'Link must be a valid URL')
     })
 
     it('Should throw a TypeError when the description parameter is not a string', function () {
-        let feed = () => { new Feed('Test Title', 'https://test/url') }
+        const feed = () => { new Feed('Test Title', 'https://test/url') }
 
         expect(feed).to.throw(TypeError, 'Description must be a string')
     })
 
     it('Should construct a Feed', function () {
-        let feed = new Feed('Test Title', 'https://test/url', 'Test Description')
+        const feed = new Feed('Test Title', 'https://test/url', 'Test Description')
 
         expect(feed).to.be.an.instanceOf(Feed)
         expect(feed.title).to.be.equal('Test Title')
@@ -30,7 +30,7 @@ describe('Feed Model', function() {
     })
 
     it('Should build a complete Feed', function () {
-        let feed = new Feed('Test Title', 'https://test/url', 'Test Description')
+        const feed = new Feed('Test Title', 'https://test/url', 'Test Description')
 
         feed.language = 'en-us'
         feed.copyright = 'Copyright 2002, Spartanburg Herald-Journal'
@@ -53,9 +53,6 @@ describe('Feed Model', function() {
 
         expect(feed).to.be.an.instanceOf(Feed)
         expect(feed).to.be.eql({
-            title: 'Test Title',
-            link: 'https://test/url',
-            description: 'Test Description',
             language: 'en-us',
             copyright: 'Copyright 2002, Spartanburg Herald-Journal',
             managingEditor: 'geo@herald.com (George Matesky)',
