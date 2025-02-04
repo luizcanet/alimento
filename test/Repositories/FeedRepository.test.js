@@ -83,11 +83,9 @@ describe('Feed Repository', function () {
         it('Should get a Feed By Link', async function () {
             const result = await feedRepository.getByLink('https://test/url')
 
-            expect(result).to.be.eql({
-                title: 'Test Title',
-                link: 'https://test/url',
-                description: 'Test Description'
-            })
+            expect(result.title).to.be.equal('Test Title')
+            expect(result.link).to.be.equal('https://test/url')
+            expect(result.description).to.be.equal('Test Description')
         })
     })
 
@@ -132,11 +130,9 @@ describe('Feed Repository', function () {
             const feedUpdated = await feedRepository.getByLink(feed.link)
 
             expect(result).to.be.true
-            expect(feedUpdated).to.be.eql({
-                title: 'Test Title Update',
-                link: 'https://test/url',
-                description: 'Test Description'
-            })
+            expect(feedUpdated.title).to.be.equal('Test Title Update')
+            expect(feedUpdated.link).to.be.equal('https://test/url')
+            expect(feedUpdated.description).to.be.equal('Test Description')
         })
     })
 

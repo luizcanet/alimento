@@ -38,9 +38,9 @@ describe('Feed Model', function() {
         feed.webMaster = 'betty@herald.com (Betty Guernsey)'
         feed.pubDate = 'Sat, 07 Sep 2002 00:00:01 GMT'
         feed.lastBuildDate = 'Sat, 07 Sep 2002 09:42:31 GMT'
-        feed.category.push('Newspapers')
-        feed.category.push('Blog')
-        feed.category.push('Technology')
+        feed.categories.push('Newspapers')
+        feed.categories.push('Blog')
+        feed.categories.push('Technology')
         feed.generator = 'MightyInHouse Content System v2.3'
         feed.docs = 'http://blogs.law.harvard.edu/tech/rss'
         feed.ttl = '60'
@@ -59,7 +59,7 @@ describe('Feed Model', function() {
             webMaster: 'betty@herald.com (Betty Guernsey)',
             pubDate: 'Sat, 07 Sep 2002 00:00:01 GMT',
             lastBuildDate: 'Sat, 07 Sep 2002 09:42:31 GMT',
-            category: ['Newspapers', 'Blog', 'Technology'],
+            categories: ['Newspapers', 'Blog', 'Technology'],
             generator: 'MightyInHouse Content System v2.3',
             docs: 'http://blogs.law.harvard.edu/tech/rss',
             ttl: '60',

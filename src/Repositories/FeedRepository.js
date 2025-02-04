@@ -31,7 +31,18 @@ class FeedRepository {
             const feedStoreRequest = feedStore.add({
                 title: feed.title,
                 link: feed.link,
-                description: feed.description
+                description: feed.description,
+                language: feed.language,
+                copyright: feed.copyright,
+                managingEditor: feed.managingEditor,
+                webMaster: feed.webMaster,
+                pubDate: feed.pubDate,
+                lastBuildDate: feed.lastBuildDate,
+                categories: feed.categories.map(category => category.name),
+                generator: feed.generator,
+                docs: feed.docs,
+                ttl: feed.ttl,
+                image: feed.image
             });
 
             feedStoreRequest.onsuccess = () => { resolve(true) }
@@ -86,7 +97,18 @@ class FeedRepository {
             const feedStoreRequest = feedStore.put({
                 title: feed.title,
                 link: feed.link,
-                description: feed.description
+                description: feed.description,
+                language: feed.language,
+                copyright: feed.copyright,
+                managingEditor: feed.managingEditor,
+                webMaster: feed.webMaster,
+                pubDate: feed.pubDate,
+                lastBuildDate: feed.lastBuildDate,
+                categories: feed.categories.map(category => category.name),
+                generator: feed.generator,
+                docs: feed.docs,
+                ttl: feed.ttl,
+                image: feed.image
             });
 
             feedStoreRequest.onsuccess = () => { resolve(true) }

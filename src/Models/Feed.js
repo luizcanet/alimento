@@ -8,7 +8,7 @@ class Feed {
     webMaster
     pubDate
     lastBuildDate
-    category = []
+    categories = []
     generator
     docs
     ttl
