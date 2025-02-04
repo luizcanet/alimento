@@ -28,22 +28,7 @@ class FeedRepository {
 
             const transaction = this.#iDBHandler.db.transaction(['feeds'], 'readwrite')
             const feedStore = transaction.objectStore('feeds');
-            const feedStoreRequest = feedStore.add({
-                title: feed.title,
-                link: feed.link,
-                description: feed.description,
-                language: feed.language,
-                copyright: feed.copyright,
-                managingEditor: feed.managingEditor,
-                webMaster: feed.webMaster,
-                pubDate: feed.pubDate,
-                lastBuildDate: feed.lastBuildDate,
-                categories: feed.categories.map(category => category.name),
-                generator: feed.generator,
-                docs: feed.docs,
-                ttl: feed.ttl,
-                image: feed.image
-            });
+            const feedStoreRequest = feedStore.add(this.#buildDBFeed(feed));
 
             feedStoreRequest.onsuccess = () => { resolve(true) }
             feedStoreRequest.onerror = (event) => {
@@ -94,22 +79,7 @@ class FeedRepository {
 
             const transaction = this.#iDBHandler.db.transaction(['feeds'], 'readwrite')
             const feedStore = transaction.objectStore('feeds');
-            const feedStoreRequest = feedStore.put({
-                title: feed.title,
-                link: feed.link,
-                description: feed.description,
-                language: feed.language,
-                copyright: feed.copyright,
-                managingEditor: feed.managingEditor,
-                webMaster: feed.webMaster,
-                pubDate: feed.pubDate,
-                lastBuildDate: feed.lastBuildDate,
-                categories: feed.categories.map(category => category.name),
-                generator: feed.generator,
-                docs: feed.docs,
-                ttl: feed.ttl,
-                image: feed.image
-            });
+            const feedStoreRequest = feedStore.put(this.#buildDBFeed(feed));
 
             feedStoreRequest.onsuccess = () => { resolve(true) }
         })
@@ -129,6 +99,25 @@ class FeedRepository {
 
             feedStoreRequest.onsuccess = () => { resolve(true) }
         })
+    }
+
+    #buildDBFeed (feed) {
+        return {
+            title: feed.title,
+            link: feed.link,
+            description: feed.description,
+            language: feed.language,
+            copyright: feed.copyright,
+            managingEditor: feed.managingEditor,
+            webMaster: feed.webMaster,
+            pubDate: feed.pubDate,
+            lastBuildDate: feed.lastBuildDate,
+            categories: feed.categories.map(category => category.name),
+            generator: feed.generator,
+            docs: feed.docs,
+            ttl: feed.ttl,
+            image: feed.image
+        }
     }
 }
 
