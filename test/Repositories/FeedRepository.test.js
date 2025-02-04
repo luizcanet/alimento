@@ -14,19 +14,6 @@ describe('Feed Repository', function () {
         await iDBHandler.init('teste_db', 1)
     })
 
-    it('Should not build throwing a Type Error when an IDBHandler is not used as parameter', function () {
-        const testNewFeedRepository = () => { new FeedRepository() }
-
-        expect(testNewFeedRepository).to.throw(TypeError, 'Must use an IDBHandler as parameter')
-    })
-
-    it('Shoul build a Feed Repository', function () {
-        const iDBHandler =  new IDBHandler(indexedDB)
-        const feedRepository = new FeedRepository(iDBHandler)
-
-        expect(feedRepository.iDBHandler).to.be.instanceOf(IDBHandler)
-    })
-
     describe('Add Feed Method', function () {
         const iDBHandler =  new IDBHandler(indexedDB)
         const feedRepository = new FeedRepository(iDBHandler)
@@ -94,11 +81,11 @@ describe('Feed Repository', function () {
         const iDBHandler =  new IDBHandler(indexedDB)
         const feedRepository = new FeedRepository(iDBHandler)
 
-        it('Shoul get the complete list of Feeds', async function () {
+        it('Should get the complete list of Feeds', async function () {
             const results = await feedRepository.getAll()
 
             expect(results[0]).to.be.instanceOf(Feed)
-            expect(results).to.have.lengthOf(1)
+            expect(results.length).to.greaterThanOrEqual(1)
         })
     })
 

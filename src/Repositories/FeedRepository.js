@@ -1,35 +1,17 @@
-import IDBHandler from '../IDBHandler.js'
 import Feed from '../Models/Feed.js'
 import Category from '../Models/Category.js'
+import BaseRepository from './BaseRepository.js'
 
-class FeedRepository {
-    #iDBHandler
-
-    constructor (iDBHandler) {
-        this.iDBHandler = iDBHandler
-    }
-
-    set iDBHandler (iDBHandler) {
-        if (!(iDBHandler instanceof IDBHandler)) {
-            throw new TypeError('Must use an IDBHandler as parameter')
-        }
-
-        this.#iDBHandler = iDBHandler
-    }
-
-    get iDBHandler () {
-        return this.#iDBHandler
-    }
-
+class FeedRepository extends BaseRepository {
     add (feed) {
         return new Promise((resolve, reject) => {
             if (!(feed instanceof Feed)) {
                 throw new TypeError('Must use a Feed as parameter')
             }
 
-            const transaction = this.#iDBHandler.db.transaction(['feeds'], 'readwrite')
-            const feedStore = transaction.objectStore('feeds');
-            const feedStoreRequest = feedStore.add(this.#buildDBFeed(feed));
+            const transaction = this.iDBHandler.db.transaction(['feeds'], 'readwrite')
+            const feedStore = transaction.objectStore('feeds')
+            const feedStoreRequest = feedStore.add(this.#buildDBFeed(feed))
 
             feedStoreRequest.onsuccess = () => { resolve(true) }
             feedStoreRequest.onerror = (event) => {
@@ -44,7 +26,7 @@ class FeedRepository {
                 throw new TypeError('Feed link must be a string')
             }
 
-            const transaction = this.#iDBHandler.db.transaction(['feeds'], 'readonly')
+            const transaction = this.iDBHandler.db.transaction(['feeds'], 'readonly')
             const feedStore = transaction.objectStore('feeds');
             const feedStoreRequest = feedStore.get(feedLink)
 
@@ -60,8 +42,8 @@ class FeedRepository {
 
     getAll () {
         return new Promise((resolve) => {
-            const transaction = this.#iDBHandler.db.transaction(['feeds'], 'readonly')
-            const feedStore = transaction.objectStore('feeds');
+            const transaction = this.iDBHandler.db.transaction(['feeds'], 'readonly')
+            const feedStore = transaction.objectStore('feeds')
             const feedStoreRequest = feedStore.getAll()
 
             feedStoreRequest.onsuccess = (event) => { 
@@ -78,9 +60,9 @@ class FeedRepository {
 
             this.getByLink(feed.link).catch((error) => { reject(error) })
 
-            const transaction = this.#iDBHandler.db.transaction(['feeds'], 'readwrite')
+            const transaction = this.iDBHandler.db.transaction(['feeds'], 'readwrite')
             const feedStore = transaction.objectStore('feeds');
-            const feedStoreRequest = feedStore.put(this.#buildDBFeed(feed));
+            const feedStoreRequest = feedStore.put(this.#buildDBFeed(feed))
 
             feedStoreRequest.onsuccess = () => { resolve(true) }
         })
@@ -94,9 +76,9 @@ class FeedRepository {
 
             this.getByLink(feed.link).catch((error) => { reject(error) })
 
-            const transaction = this.#iDBHandler.db.transaction(['feeds'], 'readwrite')
-            const feedStore = transaction.objectStore('feeds');
-            const feedStoreRequest = feedStore.delete(feed.link);
+            const transaction = this.iDBHandler.db.transaction(['feeds'], 'readwrite')
+            const feedStore = transaction.objectStore('feeds')
+            const feedStoreRequest = feedStore.delete(feed.link)
 
             feedStoreRequest.onsuccess = () => { resolve(true) }
         })
@@ -109,8 +91,8 @@ class FeedRepository {
         feed.copyright = dbFeed.copyright
         feed.managingEditor = dbFeed.managingEditor
         feed.webMaster = dbFeed.webMaster
-        feed.pubDate = dbFeed.pubDate
-        feed.lastBuildDate = dbFeed.lastBuildDate
+        feed.pubDate = new Date(dbFeed.pubDate)
+        feed.lastBuildDate = new Date(dbFeed.lastBuildDate)
         feed.categories = dbFeed.categories.map(category => new Category(category.name))
         feed.generator = dbFeed.generator
         feed.docs = dbFeed.docs

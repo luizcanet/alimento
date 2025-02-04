@@ -43,13 +43,10 @@ class IDBHandler {
             request.onupgradeneeded = (event) => {
                 const db = event.target.result;
                 const feedStore = db.createObjectStore('feeds', { keyPath: 'link' })
-                const feedItemStore = db.createObjectStore('feedItems')
                 const categoryStore = db.createObjectStore('categories', { keyPath: 'name'} )
-
+                
+                db.createObjectStore('feedItems', { autoIncrement: true })
                 feedStore.createIndex('link', 'link', { unique: true })
-                feedItemStore.createIndex('feedLink', 'feedLink')
-                feedItemStore.createIndex('title', 'title')
-                feedItemStore.createIndex('description', 'description')
                 categoryStore.createIndex('name', 'name', { unique: true })
             }
         })

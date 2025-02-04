@@ -4,7 +4,7 @@ class FeedItem {
     link
     description
     author
-    category = []
+    categories = []
     comments
     enclosure
     guid

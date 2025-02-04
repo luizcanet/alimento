@@ -15,8 +15,8 @@ describe('Feed Item Model', function () {
         feedItem.link = 'http://nytimes.com/2004/12/07FEST.html'
         feedItem.description = 'Some of the most heated chatter at the Venice Film Festival this week was about the way that the arrival of the stars at the Palazzo del Cinema was being staged.'
         feedItem.author = 'oprah@oxygen.net'
-        feedItem.category.push('Blog')
-        feedItem.category.push('Technology')
+        feedItem.categories.push('Blog')
+        feedItem.categories.push('Technology')
         feedItem.comments = 'http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290'
         feedItem.enclosure = {
             url: 'http://www.scripting.com/mp3s/weatherReportSuite.mp3',
@@ -33,7 +33,7 @@ describe('Feed Item Model', function () {
             link: 'http://nytimes.com/2004/12/07FEST.html',
             description: 'Some of the most heated chatter at the Venice Film Festival this week was about the way that the arrival of the stars at the Palazzo del Cinema was being staged.',
             author: 'oprah@oxygen.net',
-            category: ['Blog', 'Technology'],
+            categories: ['Blog', 'Technology'],
             comments: 'http://www.myblog.org/cgi-local/mt/mt-comments.cgi?entry_id=290',
             enclosure: {
                 url: 'http://www.scripting.com/mp3s/weatherReportSuite.mp3',
