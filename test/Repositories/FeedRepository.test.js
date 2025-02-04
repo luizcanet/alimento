@@ -83,6 +83,7 @@ describe('Feed Repository', function () {
         it('Should get a Feed By Link', async function () {
             const result = await feedRepository.getByLink('https://test/url')
 
+            expect(result).to.be.instanceOf(Feed)
             expect(result.title).to.be.equal('Test Title')
             expect(result.link).to.be.equal('https://test/url')
             expect(result.description).to.be.equal('Test Description')
@@ -96,6 +97,7 @@ describe('Feed Repository', function () {
         it('Shoul get the complete list of Feeds', async function () {
             const results = await feedRepository.getAll()
 
+            expect(results[0]).to.be.instanceOf(Feed)
             expect(results).to.have.lengthOf(1)
         })
     })

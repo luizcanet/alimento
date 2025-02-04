@@ -1,5 +1,6 @@
 import IDBHandler from '../IDBHandler.js'
 import Feed from '../Models/Feed.js'
+import Category from '../Models/Category.js'
 
 class FeedRepository {
     #iDBHandler
@@ -50,9 +51,9 @@ class FeedRepository {
             feedStoreRequest.onsuccess = (event) => { 
                 if (!event.target.result) {
                     reject(new Error('NotFoundError'))
+                } else {
+                    resolve(this.#buildFeed(event.target.result))
                 }
-
-                resolve(event.target.result)
              }
         })
     }
@@ -64,7 +65,7 @@ class FeedRepository {
             const feedStoreRequest = feedStore.getAll()
 
             feedStoreRequest.onsuccess = (event) => { 
-                resolve(event.target.result)
+                resolve(event.target.result.map(dbFeed => this.#buildFeed(dbFeed)))
              }
         })
     }
@@ -99,6 +100,24 @@ class FeedRepository {
 
             feedStoreRequest.onsuccess = () => { resolve(true) }
         })
+    }
+
+    #buildFeed (dbFeed) {
+        const feed = new Feed(dbFeed.title, dbFeed.link, dbFeed.description)
+
+        feed.language = dbFeed.language
+        feed.copyright = dbFeed.copyright
+        feed.managingEditor = dbFeed.managingEditor
+        feed.webMaster = dbFeed.webMaster
+        feed.pubDate = dbFeed.pubDate
+        feed.lastBuildDate = dbFeed.lastBuildDate
+        feed.categories = dbFeed.categories.map(category => new Category(category.name))
+        feed.generator = dbFeed.generator
+        feed.docs = dbFeed.docs
+        feed.ttl = dbFeed.ttl
+        feed.image = dbFeed.image
+
+        return feed
     }
 
     #buildDBFeed (feed) {
