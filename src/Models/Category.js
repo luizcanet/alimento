@@ -1,5 +1,6 @@
 class Category {
     #name
+    domain
 
     constructor (name) {
         this.name = name

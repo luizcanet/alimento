@@ -20,15 +20,17 @@ class FeedRepository extends BaseRepository {
         })
     }
 
-    getByLink (feedLink) {
+    getByUrl (url) {
         return new Promise((resolve, reject) => {
-            if (typeof feedLink !== 'string') {
-                throw new TypeError('Feed link must be a string')
+            try {
+                new URL(url)
+            } catch {
+                throw new TypeError('URL must be a valid URL')
             }
 
             const transaction = this.iDBHandler.db.transaction(['feeds'], 'readonly')
             const feedStore = transaction.objectStore('feeds');
-            const feedStoreRequest = feedStore.get(feedLink)
+            const feedStoreRequest = feedStore.get(url)
 
             feedStoreRequest.onsuccess = (event) => { 
                 if (!event.target.result) {
@@ -58,7 +60,7 @@ class FeedRepository extends BaseRepository {
                 throw new TypeError('Must use a Feed as parameter')
             }
 
-            this.getByLink(feed.link).catch((error) => { reject(error) })
+            this.getByUrl(feed.url).catch((error) => { reject(error) })
 
             const transaction = this.iDBHandler.db.transaction(['feeds'], 'readwrite')
             const feedStore = transaction.objectStore('feeds');
@@ -74,7 +76,7 @@ class FeedRepository extends BaseRepository {
                 throw new TypeError('Must use a Feed as parameter')
             }
 
-            this.getByLink(feed.link).catch((error) => { reject(error) })
+            this.getByUrl(feed.url).catch((error) => { reject(error) })
 
             const transaction = this.iDBHandler.db.transaction(['feeds'], 'readwrite')
             const feedStore = transaction.objectStore('feeds')
@@ -85,7 +87,7 @@ class FeedRepository extends BaseRepository {
     }
 
     #buildFeed (dbFeed) {
-        const feed = new Feed(dbFeed.title, dbFeed.link, dbFeed.description)
+        const feed = new Feed(dbFeed.url, dbFeed.title, dbFeed.link, dbFeed.description)
 
         feed.language = dbFeed.language
         feed.copyright = dbFeed.copyright
@@ -104,6 +106,7 @@ class FeedRepository extends BaseRepository {
 
     #buildDBFeed (feed) {
         return {
+            url: feed.url,
             title: feed.title,
             link: feed.link,
             description: feed.description,

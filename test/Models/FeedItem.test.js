@@ -2,10 +2,10 @@ import { expect } from 'chai';
 import FeedItem from '../../src/Models/FeedItem.js'
 
 describe('Feed Item Model', function () {
-    it('Should throw a TypeError when the link parameter is not a URL', function () {
+    it('Should throw a TypeError when the url parameter is not a URL', function () {
         const feed = () => { new FeedItem() }
 
-        expect(feed).to.throw(TypeError, 'Feed Link must be a valid URL')
+        expect(feed).to.throw(TypeError, 'Feed URL must be a valid URL')
     })
 
     it('Should build a complete Feed Item', function () {
@@ -27,7 +27,7 @@ describe('Feed Item Model', function () {
         feedItem.pubDate = 'Sun, 19 May 2002 15:21:36 GMT'
 
         expect(feedItem).to.be.an.instanceOf(FeedItem)
-        expect(feedItem.feedLink).to.be.equal('https://test/url')
+        expect(feedItem.feedUrl).to.be.equal('https://test/url')
         expect(feedItem).to.be.eql({
             title: 'Venice Film Festival Tries to Quit Sinking',
             link: 'http://nytimes.com/2004/12/07FEST.html',

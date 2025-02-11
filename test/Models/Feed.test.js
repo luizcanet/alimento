@@ -2,35 +2,42 @@ import { expect } from 'chai';
 import Feed from '../../src/Models/Feed.js';
 
 describe('Feed Model', function() {
-    it('Should throw a TypeError when the title parameter is not a string', function () {
+    it('Should throw a TypeError when the url parameter is not a URL', function () {
         const feed = () => { new Feed() }
+
+        expect(feed).to.throw(TypeError, 'URL must be a valid URL')
+    })
+
+    it('Should throw a TypeError when the title parameter is not a string', function () {
+        const feed = () => { new Feed('https://test/url') }
 
         expect(feed).to.throw(TypeError, 'Title must be a string')
     })
 
     it('Should throw a TypeError when the link parameter is not a URL', function () {
-        const feed = () => { new Feed('Test Title') }
+        const feed = () => { new Feed('https://test/url', 'Test Title') }
 
         expect(feed).to.throw(TypeError, 'Link must be a valid URL')
     })
 
     it('Should throw a TypeError when the description parameter is not a string', function () {
-        const feed = () => { new Feed('Test Title', 'https://test/url') }
+        const feed = () => { new Feed('https://test/url', 'Test Title', 'https://test/url') }
 
         expect(feed).to.throw(TypeError, 'Description must be a string')
     })
 
     it('Should construct a Feed', function () {
-        const feed = new Feed('Test Title', 'https://test/url', 'Test Description')
+        const feed = new Feed('https://test/url', 'Test Title', 'https://test/url', 'Test Description')
 
         expect(feed).to.be.an.instanceOf(Feed)
+        expect(feed.url).to.be.equal('https://test/url')
         expect(feed.title).to.be.equal('Test Title')
         expect(feed.link).to.be.equal('https://test/url')
         expect(feed.description).to.be.equal('Test Description')
     })
 
     it('Should build a complete Feed', function () {
-        const feed = new Feed('Test Title', 'https://test/url', 'Test Description')
+        const feed = new Feed('https://test/url', 'Test Title', 'https://test/url', 'Test Description')
 
         feed.language = 'en-us'
         feed.copyright = 'Copyright 2002, Spartanburg Herald-Journal'

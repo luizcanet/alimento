@@ -1,4 +1,5 @@
 class Feed {
+    #url
     #title
     #link
     #description
@@ -14,10 +15,25 @@ class Feed {
     ttl
     image
 
-    constructor (title, link, description) {
+    constructor (url, title, link, description) {
+        this.url = url
         this.title = title
         this.link = link
         this.description = description
+    }
+
+    set url(url) {
+        try {
+            new URL(url)
+        } catch {
+            throw new TypeError('URL must be a valid URL')
+        }
+
+        this.#url = url
+    }
+
+    get url() {
+        return this.#url
     }
 
     set title(title) {

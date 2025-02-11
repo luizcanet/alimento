@@ -17,7 +17,7 @@ class FeedItemRepository extends BaseRepository {
         })
     }
 
-    getAllByFeedLink (feedLink) {
+    getAllByFeedUrl (feedUrl) {
         return new Promise((resolve) => {
             const transaction = this.iDBHandler.db.transaction(['feedItems'], 'readonly')
             const feedItemStore = transaction.objectStore('feedItems')
@@ -26,7 +26,7 @@ class FeedItemRepository extends BaseRepository {
             feedItemStoreRequest.onsuccess = (event) => { 
                 resolve(
                     event.target.result
-                    .filter(dbFeedItem => dbFeedItem.feedLink === feedLink)
+                    .filter(dbFeedItem => dbFeedItem.feedUrl === feedUrl)
                     .map(dbFeedItem => this.#buildFeedItem(dbFeedItem))
                 )
              }
@@ -84,7 +84,7 @@ class FeedItemRepository extends BaseRepository {
                         }
                     })
                     .filter(value => {
-                        return value.dbFeedItem.feedLink === feedItem.feedLink && (
+                        return value.dbFeedItem.feedUrl === feedItem.feedUrl && (
                             value.dbFeedItem.title === feedItem.title ||
                             value.dbFeedItem.description === feedItem.description
                         )
@@ -95,7 +95,7 @@ class FeedItemRepository extends BaseRepository {
                     } else {
                         const dbFeedItem = result[0].dbFeedItem
                         
-                        dbFeedItem.feedLink = feedItem.feedLink
+                        dbFeedItem.feedUrl = feedItem.feedUrl
                         dbFeedItem.title = feedItem.title
                         dbFeedItem.link = feedItem.link
                         dbFeedItem.description = feedItem.description
@@ -138,7 +138,7 @@ class FeedItemRepository extends BaseRepository {
                         }
                     })
                     .filter(value => {
-                        return value.dbFeedItem.feedLink === feedItem.feedLink && (
+                        return value.dbFeedItem.feedUrl === feedItem.feedUrl && (
                             value.dbFeedItem.title === feedItem.title ||
                             value.dbFeedItem.description === feedItem.description
                         )
@@ -157,7 +157,7 @@ class FeedItemRepository extends BaseRepository {
     }
 
     #buildFeedItem (dbFeedItem) {
-        const feedItem = new FeedItem(dbFeedItem.feedLink)
+        const feedItem = new FeedItem(dbFeedItem.feedUrl)
 
         feedItem.title = dbFeedItem.title
         feedItem.link = dbFeedItem.link
@@ -174,7 +174,7 @@ class FeedItemRepository extends BaseRepository {
 
     #buildDBFeedItem (feedItem) {
         return {
-            feedLink: feedItem.feedLink,
+            feedUrl: feedItem.feedUrl,
             title: feedItem.title,
             link: feedItem.link,
             description: feedItem.description,

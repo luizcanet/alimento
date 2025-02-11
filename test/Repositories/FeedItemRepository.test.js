@@ -15,7 +15,7 @@ describe('Feed Item Repository', function () {
         const feedRepository = new FeedRepository(iDBHandler)
 
         await iDBHandler.init('teste_db', 1)
-        feedRepository.add(new Feed('Test Feed Item Repository', 'https://test/items/url', 'Test Feed Item Repository Description'))
+        feedRepository.add(new Feed('https://test/items/url', 'Test Feed Item Repository', 'https://test/items/url', 'Test Feed Item Repository Description'))
     })
 
     describe('Add Feed Item Method', function () {
@@ -41,12 +41,12 @@ describe('Feed Item Repository', function () {
         })
     })
 
-    describe('Get All By Feed Link Method', function () {
+    describe('Get All By Feed URL Method', function () {
         const iDBHandler =  new IDBHandler(indexedDB)
         const feedItemRepository = new FeedItemRepository(iDBHandler)
 
         it('Should get the complete list of Feeds', async function () {
-            const results = await feedItemRepository.getAllByFeedLink('https://test/items/url')
+            const results = await feedItemRepository.getAllByFeedUrl('https://test/items/url')
 
             expect(results[0]).to.be.instanceOf(FeedItem)
             expect(results.length).to.be.greaterThanOrEqual(1)
@@ -112,7 +112,7 @@ describe('Feed Item Repository', function () {
             const result = await feedItemRepository.getByFeedItem(feedItem)
 
             expect(result).to.be.instanceOf(FeedItem)
-            expect(result.feedLink).to.be.equal('https://test/items/url')
+            expect(result.feedUrl).to.be.equal('https://test/items/url')
             expect(result.title).to.be.equal('Test Feed Item Title')
         })
 
@@ -123,7 +123,7 @@ describe('Feed Item Repository', function () {
             const result = await feedItemRepository.getByFeedItem(feedItem)
 
             expect(result).to.be.instanceOf(FeedItem)
-            expect(result.feedLink).to.be.equal('https://test/items/url')
+            expect(result.feedUrl).to.be.equal('https://test/items/url')
             expect(result.description).to.be.equal('Test Feed Item Description')
         })
     })
@@ -183,7 +183,7 @@ describe('Feed Item Repository', function () {
 
             expect(result).to.be.true
             expect(feedItemUpdated.title).to.be.equal('Test Feed Item Title')
-            expect(feedItemUpdated.feedLink).to.be.equal('https://test/items/url')
+            expect(feedItemUpdated.feedUrl).to.be.equal('https://test/items/url')
             expect(feedItemUpdated.author).to.be.equal('Test Author')
         })
 
@@ -197,7 +197,7 @@ describe('Feed Item Repository', function () {
 
             expect(result).to.be.true
             expect(feedItemUpdated.description).to.be.equal('Test Feed Item Description')
-            expect(feedItemUpdated.feedLink).to.be.equal('https://test/items/url')
+            expect(feedItemUpdated.feedUrl).to.be.equal('https://test/items/url')
             expect(feedItemUpdated.title).to.be.equal('Test Title Updated')
         })
     })
