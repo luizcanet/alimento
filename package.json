@@ -2,8 +2,13 @@
   "name": "alimento",
   "version": "1.0.0",
   "description": "Alimento - A Feed Reader Application",
-  "main": "index.js",
   "type": "module",
+  "exports": {
+    "./*": "./src/*.js",
+    "./Models/*": "./src/Models/*.js",
+    "./Repositories/*": "./src/Repositories/*.js",
+    "./Services/*": "./src/Services/*.js"
+  },
   "scripts": {
     "lint": "eslint",
     "test": "c8 mocha",

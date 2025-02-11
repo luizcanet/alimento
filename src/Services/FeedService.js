@@ -1,7 +1,7 @@
-import Category from '../Models/Category.js'
-import Feed from '../Models/Feed.js'
-import FeedRepository from '../Repositories/FeedRepository.js'
-import CategoryRepository from '../Repositories/CategoryRepository.js'
+import Category from 'alimento/Models/Category'
+import Feed from 'alimento/Models/Feed'
+import FeedRepository from 'alimento/Repositories/FeedRepository'
+import CategoryRepository from 'alimento/Repositories/CategoryRepository'
 
 class FeedService {
     #repository

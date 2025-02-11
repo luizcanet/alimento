@@ -1,10 +1,10 @@
 import { expect } from 'chai'
 import { IDBFactory } from 'fake-indexeddb'
-import IDBHandler from '../../src/IDBHandler.js'
-import FeedRepository from '../../src/Repositories/FeedRepository.js'
-import FeedItem from '../../src/Models/FeedItem.js'
-import FeedItemRepository from '../../src/Repositories/FeedItemRepository.js'
-import Feed from '../../src/Models/Feed.js'
+import IDBHandler from 'alimento/IDBHandler'
+import FeedRepository from 'alimento/Repositories/FeedRepository'
+import FeedItem from 'alimento/Models/FeedItem'
+import FeedItemRepository from 'alimento/Repositories/FeedItemRepository'
+import Feed from 'alimento/Models/Feed'
 
 var indexedDB = new IDBFactory()
 

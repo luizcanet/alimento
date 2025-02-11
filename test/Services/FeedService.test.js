@@ -3,10 +3,10 @@ import fetchMock from 'fetch-mock'
 import { DOMParser } from 'xmldom-qsa'
 import { expect } from 'chai'
 import { IDBFactory } from 'fake-indexeddb'
-import IDBHandler from '../../src/IDBHandler.js'
-import FeedRepository from '../../src/Repositories/FeedRepository.js'
-import FeedService from '../../src/Services/FeedService.js'
-import CategoryRepository from '../../src/Repositories/CategoryRepository.js'
+import IDBHandler from 'alimento/IDBHandler'
+import FeedRepository from 'alimento/Repositories/FeedRepository'
+import FeedService from 'alimento/Services/FeedService'
+import CategoryRepository from 'alimento/Repositories/CategoryRepository'
 
 var indexedDB = new IDBFactory()
 
