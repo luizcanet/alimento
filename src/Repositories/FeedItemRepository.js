@@ -1,6 +1,6 @@
-import Category from 'alimento/Models/Category';
-import FeedItem from 'alimento/Models/FeedItem';
-import BaseRepository from 'alimento/Repositories/BaseRepository'
+import Category from 'alimento/Models/Category.js';
+import FeedItem from 'alimento/Models/FeedItem.js';
+import BaseRepository from 'alimento/Repositories/BaseRepository.js'
 
 class FeedItemRepository extends BaseRepository {
     add (feedItem) {

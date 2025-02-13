@@ -1,7 +1,7 @@
-import Category from 'alimento/Models/Category'
-import Feed from 'alimento/Models/Feed'
-import FeedRepository from 'alimento/Repositories/FeedRepository'
-import CategoryRepository from 'alimento/Repositories/CategoryRepository'
+import Category from 'alimento/Models/Category.js'
+import Feed from 'alimento/Models/Feed.js'
+import FeedRepository from 'alimento/Repositories/FeedRepository.js'
+import CategoryRepository from 'alimento/Repositories/CategoryRepository.js'
 
 class FeedService {
     #repository
@@ -27,9 +27,9 @@ class FeedService {
             throw new TypeError('URL must be a valid URL')
         }
 
-        const result = await fetch(url, { method: 'GET' })
+        const response = await fetch('/proxy?url=' + url, { method: 'GET' })
 
-        const feed = this.#parse(await result.json(), url)
+        const feed = this.#parse(await response.text(), url)
 
         feed.categories.forEach(async category => {
             try {
@@ -42,9 +42,9 @@ class FeedService {
         return await this.#repository.add(feed)
     }
 
-    #parse (response, url) {
+    #parse (xml, url) {
         const parser = new DOMParser()
-        const doc = parser.parseFromString(response.body, response.headers['Content-Type'])
+        const doc = parser.parseFromString(xml, 'application/xml')
         const feed = new Feed(
             url,
             doc.querySelector('channel > title').textContent,

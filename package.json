@@ -4,12 +4,10 @@
   "description": "Alimento - A Feed Reader Application",
   "type": "module",
   "exports": {
-    "./*": "./src/*.js",
-    "./Models/*": "./src/Models/*.js",
-    "./Repositories/*": "./src/Repositories/*.js",
-    "./Services/*": "./src/Services/*.js"
+    "./*": "./src/*"
   },
   "scripts": {
+    "start": "browser-sync start --config conf/browser-sync.cjs",
     "lint": "eslint",
     "test": "c8 mocha",
     "coveralls": "c8 report --reporter=text-lcov | coveralls"
@@ -32,6 +30,7 @@
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@xmldom/xmldom": "^0.9.7",
+    "browser-sync": "^3.0.3",
     "c8": "^10.1.3",
     "chai": "^5.1.2",
     "coveralls": "^3.1.1",
@@ -41,6 +40,8 @@
     "fake-indexeddb": "^6.0.0",
     "fetch-mock": "^12.3.0",
     "globals": "^15.14.0",
+    "http-server": "^14.1.1",
+    "jsdom": "^26.0.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^11.1.0",
     "mocha-lcov-reporter": "^1.3.0",
@@ -64,6 +65,13 @@
     "all": true,
     "include": [
       "src/**/*.js"
+    ],
+    "exclude": [
+      "src/index.js",
+      "src/Components/**/*.js"
     ]
+  },
+  "dependencies": {
+    "@modnes/custom-element": "^1.0.1"
   }
 }

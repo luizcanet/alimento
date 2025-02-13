@@ -1,5 +1,5 @@
-import BaseRepository from 'alimento/Repositories/BaseRepository'
-import Category from 'alimento/Models/Category'
+import BaseRepository from 'alimento/Repositories/BaseRepository.js'
+import Category from 'alimento/Models/Category.js'
 
 class CategoryRepository extends BaseRepository {
     add (category) {

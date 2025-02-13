@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import Feed from '../../src/Models/Feed.js';
+import { expect } from 'chai'
+import Feed from 'alimento/Models/Feed.js'
 
 describe('Feed Model', function() {
     it('Should throw a TypeError when the url parameter is not a URL', function () {

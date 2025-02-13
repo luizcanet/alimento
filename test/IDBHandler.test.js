@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto'
 import { expect } from 'chai'
 import { IDBFactory, IDBDatabase } from 'fake-indexeddb'
-import IDBHandler from 'alimento/IDBHandler'
+import IDBHandler from 'alimento/IDBHandler.js'
 
 var indexedDB = new IDBFactory()
 

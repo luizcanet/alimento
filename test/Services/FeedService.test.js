@@ -3,10 +3,10 @@ import fetchMock from 'fetch-mock'
 import { DOMParser } from 'xmldom-qsa'
 import { expect } from 'chai'
 import { IDBFactory } from 'fake-indexeddb'
-import IDBHandler from 'alimento/IDBHandler'
-import FeedRepository from 'alimento/Repositories/FeedRepository'
-import FeedService from 'alimento/Services/FeedService'
-import CategoryRepository from 'alimento/Repositories/CategoryRepository'
+import IDBHandler from 'alimento/IDBHandler.js'
+import FeedRepository from 'alimento/Repositories/FeedRepository.js'
+import FeedService from 'alimento/Services/FeedService.js'
+import CategoryRepository from 'alimento/Repositories/CategoryRepository.js'
 
 var indexedDB = new IDBFactory()
 
@@ -67,7 +67,7 @@ describe('Feed Service', function () {
             const xml = await fs.readFile('test/rss2sample.xml', { encoding: 'utf8' })
 
             fetchMock.mockGlobal().get(
-                url,
+                'null/proxy?url=' + url,
                 {
                     status: 200,
                     body: xml,
@@ -88,7 +88,7 @@ describe('Feed Service', function () {
             const xml = await fs.readFile('test/rss2full-sample.xml', { encoding: 'utf8' })
 
             fetchMock.mockGlobal().get(
-                url,
+                'null/proxy?url=' + url,
                 {
                     status: 200,
                     body: xml,
