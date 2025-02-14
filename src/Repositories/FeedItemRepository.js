@@ -105,6 +105,7 @@ class FeedItemRepository extends BaseRepository {
                         dbFeedItem.enclosure = feedItem.enclosure
                         dbFeedItem.guid = feedItem.guid
                         dbFeedItem.pubDate = feedItem.pubDate
+                        dbFeedItem.new = false
                         
                         const feedItemStorePutRequest = feedItemStore.put(dbFeedItem, result[0].key)
     

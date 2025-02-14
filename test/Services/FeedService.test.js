@@ -7,6 +7,7 @@ import IDBHandler from 'alimento/IDBHandler.js'
 import FeedRepository from 'alimento/Repositories/FeedRepository.js'
 import FeedService from 'alimento/Services/FeedService.js'
 import CategoryRepository from 'alimento/Repositories/CategoryRepository.js'
+import FeedItemRepository from '../../src/Repositories/FeedItemRepository.js'
 
 var indexedDB = new IDBFactory()
 
@@ -23,26 +24,37 @@ describe('Feed Service', function () {
         await iDBHandler.init('teste_db', 1)
     })
 
-    it('Should not build throwing a Type Error when an Feed Repository is not used as parameter', function () {
+    it('Should not build throwing a Type Error when a Feed Repository is not used as parameter', function () {
         const testNewFeedService = () => { new FeedService() }
 
-        expect(testNewFeedService).to.throw(TypeError, 'Must use an FeedRepository as parameter')
+        expect(testNewFeedService).to.throw(TypeError, 'Must use a FeedRepository as parameter')
     })
 
-    it('Should not build throwing a Type Error when an Category Repository is not used as parameter', function () {
+    it('Should not build throwing a Type Error when a Category Repository is not used as parameter', function () {
         const iDBHandler =  new IDBHandler(indexedDB)
         const feedRepository = new FeedRepository(iDBHandler)
 
         const testNewFeedService = () => { new FeedService(feedRepository) }
 
-        expect(testNewFeedService).to.throw(TypeError, 'Must use an CategoryRepository as parameter')
+        expect(testNewFeedService).to.throw(TypeError, 'Must use a CategoryRepository as parameter')
+    })
+
+    it('Should not build throwing a Type Error when a Feed Item Repository is not used as parameter', function () {
+        const iDBHandler =  new IDBHandler(indexedDB)
+        const feedRepository = new FeedRepository(iDBHandler)
+        const categoryRepository = new CategoryRepository(iDBHandler)
+
+        const testNewFeedService = () => { new FeedService(feedRepository, categoryRepository) }
+
+        expect(testNewFeedService).to.throw(TypeError, 'Must use a FeedItemRepository as parameter')
     })
 
     it('Should build a Feed Service', function () {
         const iDBHandler =  new IDBHandler(indexedDB)
         const feedRepository = new FeedRepository(iDBHandler)
         const categoryRepository = new CategoryRepository(iDBHandler)
-        const feedService = new FeedService(feedRepository, categoryRepository)
+        const feedItemRepository = new FeedItemRepository(iDBHandler)
+        const feedService = new FeedService(feedRepository, categoryRepository, feedItemRepository)
 
         expect(feedService).to.be.instanceOf(FeedService)
     })
@@ -51,7 +63,8 @@ describe('Feed Service', function () {
         const iDBHandler =  new IDBHandler(indexedDB)
         const feedRepository = new FeedRepository(iDBHandler)
         const categoryRepository = new CategoryRepository(iDBHandler)
-        const feedService = new FeedService(feedRepository, categoryRepository)
+        const feedItemRepository = new FeedItemRepository(iDBHandler)
+        const feedService = new FeedService(feedRepository, categoryRepository, feedItemRepository)
 
         it('Should throw a Type Error when the parameter is not a valid URL', async  function () {
             try {
@@ -100,6 +113,44 @@ describe('Feed Service', function () {
             )
             
             const result = await feedService.subscribe(url)
+
+            expect(result).to.be.true
+        })
+    })
+
+    describe('Update Method', function () {
+        const iDBHandler =  new IDBHandler(indexedDB)
+        const feedRepository = new FeedRepository(iDBHandler)
+        const categoryRepository = new CategoryRepository(iDBHandler)
+        const feedItemRepository = new FeedItemRepository(iDBHandler)
+        const feedService = new FeedService(feedRepository, categoryRepository, feedItemRepository)
+
+        it('Should throw a Type Error when the parameter is not a valid URL', async  function () {
+            try {
+                await feedService.update('URL must be a valid URL')
+            } catch (error) {
+                expect(error).to.be.instanceOf(TypeError)
+                expect(error.message).to.be.equal('URL must be a valid URL')
+            }
+        })
+
+        it('Should return true', async function () {
+            const url = 'https://cyber.harvard.edu/rss/examples/rss2sample.xml'
+            const xml = await fs.readFile('test/rss2sample.xml', { encoding: 'utf8' })
+
+            fetchMock.mockGlobal().get(
+                'null/proxy?url=' + url,
+                {
+                    status: 200,
+                    body: xml,
+                    delay: 30,
+                    headers: {
+                        'Content-Type': 'application/xml'
+                    }
+                }
+            )
+            
+            const result = await feedService.update(url)
 
             expect(result).to.be.true
         })

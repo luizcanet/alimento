@@ -9,6 +9,7 @@ class FeedItem {
     enclosure
     guid
     pubDate
+    source
     new = true
 
     constructor (feedUrl) {

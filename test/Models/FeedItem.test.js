@@ -42,6 +42,7 @@ describe('Feed Item Model', function () {
             },
             guid: 'http://inessential.com/2002/09/01.php#a2',
             pubDate: 'Sun, 19 May 2002 15:21:36 GMT',
+            source: undefined,
             new: true
         })
     })
