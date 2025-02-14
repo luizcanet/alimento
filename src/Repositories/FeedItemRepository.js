@@ -168,6 +168,7 @@ class FeedItemRepository extends BaseRepository {
         feedItem.enclosure = dbFeedItem.enclosure
         feedItem.guid = dbFeedItem.guid
         feedItem.pubDate = new Date(dbFeedItem.pubDate)
+        feedItem.new = dbFeedItem.new
 
         return feedItem
     }
@@ -183,7 +184,8 @@ class FeedItemRepository extends BaseRepository {
             comments: feedItem.comments,
             enclosure: feedItem.enclosure,
             guid: feedItem.guid,
-            pubDate: feedItem.pubDate
+            pubDate: feedItem.pubDate,
+            new: feedItem.new
         }
     }
 }

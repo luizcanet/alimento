@@ -9,6 +9,7 @@ class FeedItem {
     enclosure
     guid
     pubDate
+    new = true
 
     constructor (feedUrl) {
         this.feedUrl = feedUrl

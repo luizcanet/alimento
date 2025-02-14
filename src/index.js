@@ -1,1 +1,1 @@
-import 'alimento/Components/MainApp/MainApp.js'
+import 'alimento/Components/AlimentoApp/AlimentoApp.js'

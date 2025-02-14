@@ -28,11 +28,15 @@ class AddSubscription extends CustomElement {
     }
 
     async subscribe () {
-        const input =  this.querySelector('input')
+        const url =  this.querySelector('input').value
 
-        await this.service.subscribe(input.value)
-
-        input.value = ''
+        if (await this.service.subscribe(url)) {
+            this.eventTarget.dispatchEvent(new CustomEvent('feedAdded', {
+                detail: {
+                  url: url
+                }
+            }))
+        }
     }
 
     init () {
