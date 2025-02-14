@@ -1,18 +1,12 @@
 import CustomElement from '@modnes/custom-element'
-import FeedService from 'alimento/Services/FeedService.js';
-import FeedRepository from 'alimento/Repositories/FeedRepository.js';
-import IDBHandler from 'alimento/IDBHandler.js';
-import CategoryRepository from 'alimento/Repositories/CategoryRepository.js';
+import FeedServiceFactory from 'alimento/Services/FeedServiceFactory.js';
 
 class AddSubscription extends CustomElement {
     service
 
     constructor () {
         super()
-        this.service = new FeedService(
-            new FeedRepository(new IDBHandler(indexedDB)),
-            new CategoryRepository(new IDBHandler(indexedDB))
-        )
+        this.service = FeedServiceFactory.build()
         this.template = () => `
             <input
                 type="url"
@@ -31,7 +25,7 @@ class AddSubscription extends CustomElement {
         const url =  this.querySelector('input').value
 
         if (await this.service.subscribe(url)) {
-            this.eventTarget.dispatchEvent(new CustomEvent('feedAdded', {
+            this.dispatchEvent(new CustomEvent('feedAdded', {
                 detail: {
                   url: url
                 }

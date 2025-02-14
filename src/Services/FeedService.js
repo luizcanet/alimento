@@ -47,7 +47,11 @@ class FeedService {
             }
         })
 
-        return await this.#repository.add(feed)
+        try {
+            return await this.#repository.add(feed)
+        } catch {
+            return false
+        }
     }
 
     async update (url) {
