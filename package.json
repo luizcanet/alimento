@@ -1,0 +1,77 @@
+{
+  "name": "alimento",
+  "version": "1.0.0",
+  "description": "Alimento - A Feed Reader Application",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*"
+  },
+  "scripts": {
+    "start": "browser-sync start --config conf/browser-sync.cjs",
+    "lint": "eslint",
+    "test": "c8 mocha",
+    "coveralls": "c8 report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luizcanet/alimento.git"
+  },
+  "keywords": [
+    "feed",
+    "reader",
+    "rss"
+  ],
+  "author": "Luiz Henrique Canet Filho <me@luizca.net>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/luizcanet/alimento/issues"
+  },
+  "homepage": "https://github.com/luizcanet/alimento#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@xmldom/xmldom": "^0.9.7",
+    "browser-sync": "^3.0.3",
+    "c8": "^10.1.3",
+    "chai": "^5.1.2",
+    "coveralls": "^3.1.1",
+    "eslint": "^9.19.0",
+    "eslint-plugin-mocha": "^10.5.0",
+    "esm": "^3.2.25",
+    "fake-indexeddb": "^6.0.0",
+    "fetch-mock": "^12.3.0",
+    "globals": "^15.14.0",
+    "http-server": "^14.1.1",
+    "jsdom": "^26.0.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^11.1.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "xmldom-qsa": "^1.1.3"
+  },
+  "mocha": {
+    "require": [
+      "esm",
+      "jsdom-global/register"
+    ],
+    "recursive": true,
+    "extension": [
+      "js"
+    ]
+  },
+  "c8": {
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "all": true,
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "src/index.js",
+      "src/Components/**/*.js"
+    ]
+  },
+  "dependencies": {
+    "@modnes/custom-element": "^1.0.1"
+  }
+}
