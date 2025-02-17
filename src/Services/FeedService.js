@@ -43,7 +43,7 @@ class FeedService {
             try {
                 await this.#categoryRepository.add(category)
             } catch {
-                console.info('Category already added.')
+                return
             }
         })
 
@@ -70,7 +70,7 @@ class FeedService {
                 try {
                     await this.#categoryRepository.add(category)
                 } catch {
-                    console.info('Category already added: ' + category.name)
+                    return
                 }
             })
 
