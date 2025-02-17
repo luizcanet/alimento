@@ -70,14 +70,14 @@ class FeedService {
                 try {
                     await this.#categoryRepository.add(category)
                 } catch {
-                    console.info('Category already added.')
+                    console.info('Category already added: ' + category.name)
                 }
             })
 
             try {
-                await this.#feedItemRepository.add(feedItem)
-            } catch {
                 await this.#feedItemRepository.update(feedItem)
+            } catch {
+                await this.#feedItemRepository.add(feedItem)
             }
         })
 
@@ -145,7 +145,7 @@ class FeedService {
             feedItem.pubDate = item.querySelector('pubDate') ? Date(item.querySelector('pubDate').textContent) : undefined
             
             if (item.querySelector('category')) {
-                item.querySelectorAll('ccategory').forEach(element => {
+                item.querySelectorAll('category').forEach(element => {
                     const category = new Category(element.textContent)
     
                     category.domain = element.getAttribute('domain') ? element.getAttribute('domain') : undefined
@@ -165,7 +165,7 @@ class FeedService {
             if (item.querySelector('source')) {
                 feedItem.source = {
                     url: item.querySelector('source').getAttribute('url') ?? undefined,
-                    title: item.querySelector('enclosure').textContent
+                    title: item.querySelector('source').textContent
                 }
             }
 

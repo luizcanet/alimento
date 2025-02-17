@@ -96,6 +96,27 @@ describe('Feed Service', function () {
             expect(result).to.be.true
         })
 
+        it('Should return false', async function () {
+            const url = 'https://cyber.harvard.edu/rss/examples/rss2sample.xml'
+            const xml = await fs.readFile('test/rss2sample.xml', { encoding: 'utf8' })
+
+            fetchMock.mockGlobal().get(
+                'null/proxy?url=' + url,
+                {
+                    status: 200,
+                    body: xml,
+                    delay: 30,
+                    headers: {
+                        'Content-Type': 'application/xml'
+                    }
+                }
+            )
+            
+            const result = await feedService.subscribe(url)
+
+            expect(result).to.be.false
+        })
+
         it('Should return true with full sample', async function () {
             const url = 'https://cyber.harvard.edu/rss/examples/rss2full-sample.xml'
             const xml = await fs.readFile('test/rss2full-sample.xml', { encoding: 'utf8' })
@@ -135,6 +156,27 @@ describe('Feed Service', function () {
         })
 
         it('Should return true', async function () {
+            const url = 'https://cyber.harvard.edu/rss/examples/rss2sample.xml'
+            const xml = await fs.readFile('test/rss2sample.xml', { encoding: 'utf8' })
+
+            fetchMock.mockGlobal().get(
+                'null/proxy?url=' + url,
+                {
+                    status: 200,
+                    body: xml,
+                    delay: 30,
+                    headers: {
+                        'Content-Type': 'application/xml'
+                    }
+                }
+            )
+            
+            const result = await feedService.update(url)
+
+            expect(result).to.be.true
+        })
+
+        it('Should return true again', async function () {
             const url = 'https://cyber.harvard.edu/rss/examples/rss2sample.xml'
             const xml = await fs.readFile('test/rss2sample.xml', { encoding: 'utf8' })
 

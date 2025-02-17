@@ -31,6 +31,8 @@ class AddSubscription extends CustomElement {
                 }
             }))
         }
+
+        url.value = ''
     }
 
     init () {
