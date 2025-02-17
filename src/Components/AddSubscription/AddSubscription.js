@@ -8,16 +8,22 @@ class AddSubscription extends CustomElement {
         super()
         this.service = FeedServiceFactory.build()
         this.template = () => `
-            <input
-                type="url"
-                name="feedUrl"
-                placeholder="https://cyber.harvard.edu/rss/examples/rss2sample.xml"
-                pattern="https?://.*"
-                required
-            />
-            <button>
-                Subscribe
-            </button>
+            <form>
+                <label for="feedUrl">
+                    Feed URL
+                </label>
+                <input
+                    type="url"
+                    name="feedUrl"
+                    id="feedUrl"
+                    placeholder="https://cyber.harvard.edu/rss/examples/rss2sample.xml"
+                    pattern="https?://.*"
+                    required
+                />
+                <button type="submit">
+                    Subscribe
+                </button>
+            </form>
         `
     }
 
@@ -36,7 +42,8 @@ class AddSubscription extends CustomElement {
     }
 
     init () {
-        this.querySelector('button').addEventListener('click', () => {
+        this.querySelector('form').addEventListener('submit', event => {
+            event.preventDefault()
             this.subscribe()
         })
     }
