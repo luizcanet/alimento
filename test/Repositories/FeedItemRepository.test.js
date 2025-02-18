@@ -41,11 +41,23 @@ describe('Feed Item Repository', function () {
         })
     })
 
+    describe('Get All Method', function () {
+        const iDBHandler =  new IDBHandler(indexedDB)
+        const feedItemRepository = new FeedItemRepository(iDBHandler)
+
+        it('Should get the complete list of Feed Items', async function () {
+            const results = await feedItemRepository.getAll()
+
+            expect(results[0]).to.be.instanceOf(FeedItem)
+            expect(results.length).to.be.greaterThanOrEqual(1)
+        })
+    })
+
     describe('Get All By Feed URL Method', function () {
         const iDBHandler =  new IDBHandler(indexedDB)
         const feedItemRepository = new FeedItemRepository(iDBHandler)
 
-        it('Should get the complete list of Feeds', async function () {
+        it('Should get the complete list of Feed Items by Feed', async function () {
             const results = await feedItemRepository.getAllByFeedUrl('https://test/items/url')
 
             expect(results[0]).to.be.instanceOf(FeedItem)

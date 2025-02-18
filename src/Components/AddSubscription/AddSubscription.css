@@ -1,0 +1,27 @@
+add-subscription {
+    display: block;
+}
+
+add-subscription .add-subscription {
+    align-items: baseline;
+    display: flex;
+    margin-bottom: 1.25em;
+}
+
+add-subscription .add-subscription__label {
+    margin-right: 0.5em;
+  }
+
+add-subscription .add-subscription__input {
+    flex-grow: 2;
+}
+
+add-subscription .add-subscription__button {
+    margin-left: 0.5em;
+}
+
+@media screen and (max-width: 414px) {
+    add-subscription .add-subscription__label {
+      display: none;
+    }
+}

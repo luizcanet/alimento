@@ -7,7 +7,8 @@ import IDBHandler from 'alimento/IDBHandler.js'
 import FeedRepository from 'alimento/Repositories/FeedRepository.js'
 import FeedService from 'alimento/Services/FeedService.js'
 import CategoryRepository from 'alimento/Repositories/CategoryRepository.js'
-import FeedItemRepository from '../../src/Repositories/FeedItemRepository.js'
+import FeedItemRepository from 'alimento/Repositories/FeedItemRepository.js'
+import FeedItem from 'alimento/Models/FeedItem.js'
 
 var indexedDB = new IDBFactory()
 
@@ -195,6 +196,21 @@ describe('Feed Service', function () {
             const result = await feedService.update(url)
 
             expect(result).to.be.true
+        })
+    })
+
+    describe('Get Feed Items Method', function () {
+        const iDBHandler =  new IDBHandler(indexedDB)
+        const feedRepository = new FeedRepository(iDBHandler)
+        const categoryRepository = new CategoryRepository(iDBHandler)
+        const feedItemRepository = new FeedItemRepository(iDBHandler)
+        const feedService = new FeedService(feedRepository, categoryRepository, feedItemRepository)
+
+        it('Should return a Feed Items List', async function () {
+            const feedItemsList = await feedService.getFeedItems()
+
+            expect(feedItemsList[0]).to.be.instanceOf(FeedItem)
+            expect(feedItemsList.length).to.be.greaterThanOrEqual(1)
         })
     })
 })
