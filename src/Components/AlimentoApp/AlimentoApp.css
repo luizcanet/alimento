@@ -3,3 +3,9 @@ alimento-app {
     max-width: 880px;
     margin: 0 auto;
 }
+
+.alimento-logo {
+    height: 1em;
+    width: 1em;
+    fill: var(--color-blue);
+}
