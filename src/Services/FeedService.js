@@ -84,6 +84,14 @@ class FeedService {
         return true
     }
 
+    async getFeedItems () {
+        const feedItems = await this.#feedItemRepository.getAll()
+
+        feedItems.sort((a, b) => b.pubDate - a.pubDate)
+
+        return feedItems
+    }
+
     #parseFeed (xml, url) {
         const parser = new DOMParser()
         const doc = parser.parseFromString(xml, 'application/xml')
@@ -98,8 +106,8 @@ class FeedService {
         feed.copyright = doc.querySelector('channel > copyright') ? doc.querySelector('channel > copyright').textContent : undefined
         feed.managingEditor = doc.querySelector('channel > managingEditor') ? doc.querySelector('channel > managingEditor').textContent : undefined
         feed.webMaster = doc.querySelector('channel > webMaster') ? doc.querySelector('channel > webMaster').textContent : undefined
-        feed.pubDate = doc.querySelector('channel > pubDate') ? Date(doc.querySelector('channel > pubDate').textContent) : undefined
-        feed.lastBuildDate = doc.querySelector('channel > lastBuildDate') ? Date(doc.querySelector('channel > lastBuildDate').textContent) : undefined
+        feed.pubDate = doc.querySelector('channel > pubDate') ? Date.parse(doc.querySelector('channel > pubDate').textContent) : undefined
+        feed.lastBuildDate = doc.querySelector('channel > lastBuildDate') ? Date.parse(doc.querySelector('channel > lastBuildDate').textContent) : undefined
         feed.generator = doc.querySelector('channel > generator') ? doc.querySelector('channel > generator').textContent : undefined
         feed.docs = doc.querySelector('channel > docs') ? doc.querySelector('channel > docs').textContent : undefined
         feed.ttl = doc.querySelector('channel > ttl') ? Number(doc.querySelector('channel > ttl').textContent) : undefined
@@ -142,7 +150,7 @@ class FeedService {
             feedItem.author = item.querySelector('author') ? item.querySelector('author').textContent : undefined
             feedItem.comments = item.querySelector('comments') ? item.querySelector('comments').textContent : undefined
             feedItem.guid = item.querySelector('guid') ? item.querySelector('guid').textContent : undefined
-            feedItem.pubDate = item.querySelector('pubDate') ? Date(item.querySelector('pubDate').textContent) : undefined
+            feedItem.pubDate = item.querySelector('pubDate') ? Date.parse(item.querySelector('pubDate').textContent) : undefined
             
             if (item.querySelector('category')) {
                 item.querySelectorAll('category').forEach(element => {

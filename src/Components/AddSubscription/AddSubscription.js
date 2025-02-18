@@ -1,5 +1,5 @@
 import CustomElement from '@modnes/custom-element'
-import FeedServiceFactory from 'alimento/Services/FeedServiceFactory.js';
+import FeedServiceFactory from 'alimento/Services/FeedServiceFactory.js'
 
 class AddSubscription extends CustomElement {
     service
@@ -8,19 +8,20 @@ class AddSubscription extends CustomElement {
         super()
         this.service = FeedServiceFactory.build()
         this.template = () => `
-            <form>
-                <label for="feedUrl">
+            <form class="add-subscription">
+                <label for="feedUrl" class="add-subscription__label">
                     Feed URL
                 </label>
                 <input
                     type="url"
                     name="feedUrl"
                     id="feedUrl"
-                    placeholder="https://cyber.harvard.edu/rss/examples/rss2sample.xml"
+                    placeholder="Ex.: https://cyber.harvard.edu/rss/examples/rss2sample.xml"
                     pattern="https?://.*"
                     required
+                    class="add-subscription__input"
                 />
-                <button type="submit">
+                <button type="submit" class="add-subscription__button">
                     Subscribe
                 </button>
             </form>
@@ -49,6 +50,6 @@ class AddSubscription extends CustomElement {
     }
 }
 
-customElements.define('add-subscription', AddSubscription);
+customElements.define('add-subscription', AddSubscription)
 
 export default AddSubscription

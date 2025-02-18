@@ -17,6 +17,21 @@ class FeedItemRepository extends BaseRepository {
         })
     }
 
+    getAll () {
+        return new Promise((resolve) => {
+            const transaction = this.iDBHandler.db.transaction(['feedItems'], 'readonly')
+            const feedItemStore = transaction.objectStore('feedItems')
+            const feedItemStoreRequest = feedItemStore.getAll()
+
+            feedItemStoreRequest.onsuccess = (event) => { 
+                resolve(
+                    event.target.result
+                    .map(dbFeedItem => this.#buildFeedItem(dbFeedItem))
+                )
+             }
+        })
+    }
+
     getAllByFeedUrl (feedUrl) {
         return new Promise((resolve) => {
             const transaction = this.iDBHandler.db.transaction(['feedItems'], 'readonly')
@@ -164,12 +179,15 @@ class FeedItemRepository extends BaseRepository {
         feedItem.link = dbFeedItem.link
         feedItem.description = dbFeedItem.description
         feedItem.author = dbFeedItem.author
-        feedItem.categories = dbFeedItem.categories.map(category => new Category(category.name))
         feedItem.comments = dbFeedItem.comments
         feedItem.enclosure = dbFeedItem.enclosure
         feedItem.guid = dbFeedItem.guid
         feedItem.pubDate = new Date(dbFeedItem.pubDate)
         feedItem.new = dbFeedItem.new
+        
+        if (dbFeedItem.categories.length > 0) {
+            feedItem.categories = dbFeedItem.categories.map(category => new Category(category))
+        }
 
         return feedItem
     }
