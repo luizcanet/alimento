@@ -1,7 +1,12 @@
+@import "./Components/AddSubscription/AddSubscription.css";
+@import "./Components/FeedItemsList/FeedItemsList.css";
+
 :root {
     --color-white: #faf9f7;
     --color-black: #0a0700;
     --color-blue: #063fa1;
+    --color-green: #3fab3c;
+    --color-yellow: #dbb714;
 
     --background: var(--color-white);
     --foreground: var(--color-black);
@@ -34,4 +39,11 @@ input::placeholder {
     font-style: italic;
 }
 
-@import "./Components/AddSubscription/AddSubscription.css";
+button {
+    background-color: var(--color-green);
+    border-color: var(--color-green);
+    border-radius: 0.25em;
+    color: var(--color-white);
+    font-size: 1em;
+    padding: 0.5em;
+}

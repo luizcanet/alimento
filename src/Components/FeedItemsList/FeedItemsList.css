@@ -1,0 +1,47 @@
+feed-items-list {
+    display: block;
+}
+
+feed-items-list .feed-item {
+    border-bottom: solid hsl(from var(--foreground) h 0 calc(l * 35)) 1px;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+feed-items-list .feed-item__link {
+    display: block;
+}
+
+feed-items-list .feed-item__new {
+    background-color: var(--color-yellow);
+    border-radius: 0.25em;
+    color: var(--foreground);
+    float: right;
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-left: 0.5em;
+    padding: 0.75em;
+    text-transform: lowercase;
+}
+
+feed-items-list .feed-item__title {
+    font-size: 1.25em;
+    font-weight: normal;
+    margin-bottom: 0.25em;
+}
+
+feed-items-list .feed-item__description {
+    margin: 0.5em 0;
+}
+
+feed-items-list .feed-item__footer {
+    font-size: 0.75em;
+}
+
+feed-items-list .feed-item__footer div {
+    margin-top: 0.125em;
+}
+
+feed-items-list .feed-item__label {
+    color: hsl(from var(--foreground) h 15% calc(l * 25));
+}
