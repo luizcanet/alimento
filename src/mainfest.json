@@ -1,0 +1,16 @@
+{
+    "name": "Alimento Feed Reader",
+    "short_name": "Alimento",
+    "description": "A Feed Reader Application",
+    "icons": [
+      {
+        "src": "alimento-logo.svg",
+        "sizes": "any"
+      }
+    ],
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "theme_color": "#faf9f7",
+    "background_color": "#faf9f7"
+}

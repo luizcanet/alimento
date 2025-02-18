@@ -1,8 +1,0 @@
-{
-  "imports": {
-    "alimento/": "./",
-    "@modnes/custom-element/": "../node_modules/@modnes/custom-element/",
-    "@modnes/custom-element": "../node_modules/@modnes/custom-element/custom-element.js"
-  },
-  "scopes": {}
-}
