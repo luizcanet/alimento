@@ -39,6 +39,12 @@ class AlimentoApp extends CustomElement {
             </header>
             <feed-items-list></feed-items-list>
         `
+
+        this.addEventListener('feedUpdated', () => {
+            const feedItemsList = this.querySelector('feed-items-list')
+            
+            feedItemsList.loadFeedItems()
+        })
     }
 
     async connectedCallback () {
@@ -54,18 +60,14 @@ class AlimentoApp extends CustomElement {
         
         addSubscription.addEventListener('feedAdded', async event => {
             if (await this.service.update(event.detail.url)) {
-                this.dispatchEvent(new CustomEvent('feedUpdated', {
-                    detail: {
-                        url: event.detail.url
-                    }
-                }))
+                setTimeout(() => {
+                    this.dispatchEvent(new CustomEvent('feedUpdated', {
+                        detail: {
+                            url: event.detail.url
+                        }
+                    }))
+                }, 1)
             }
-        })
-
-        this.addEventListener('feedUpdated', () => {
-            const feedItemsList = this.querySelector('feed-items-list')
-            
-            feedItemsList.loadFeedItems()
         })
     }
 }
