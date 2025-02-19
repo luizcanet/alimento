@@ -39,18 +39,13 @@ class AlimentoApp extends CustomElement {
             </header>
             <feed-items-list></feed-items-list>
         `
-
-        this.addEventListener('feedUpdated', () => {
-            const feedItemsList = this.querySelector('feed-items-list')
-            
-            feedItemsList.loadFeedItems()
-        })
     }
 
     async connectedCallback () {
         const iDBHandler =  new IDBHandler(indexedDB)
 
         await iDBHandler.init('alimento_db', 1)
+        this.subscribe()
         this.update()
     
         super.connectedCallback()
@@ -58,17 +53,13 @@ class AlimentoApp extends CustomElement {
 
     init () {
         const addSubscription = this.querySelector('add-subscription')
+        const feedItemsList = this.querySelector('feed-items-list')
         
-        addSubscription.addEventListener('feedAdded', async event => {
-            if (await this.service.update(event.detail.url)) {
-                setTimeout(() => {
-                    this.dispatchEvent(new CustomEvent('feedUpdated', {
-                        detail: {
-                            url: event.detail.url
-                        }
-                    }))
-                }, 5)
-            }
+        addSubscription.addEventListener('feedAdded', this.feedAddedHandler.bind(this))
+        this.addEventListener('feedAdded', this.feedAddedHandler.bind(this))
+
+        this.addEventListener('feedUpdated', () => {
+            feedItemsList.loadFeedItems()
         })
     }
 
@@ -76,7 +67,37 @@ class AlimentoApp extends CustomElement {
         if (await this.service.updateAll()) {
             setTimeout(() => {
                 this.dispatchEvent(new CustomEvent('feedUpdated'))
-            }, 10)
+            }, 1)
+        }
+    }
+
+    async subscribe () {
+        const params = new URLSearchParams(document.location.search)
+        const subscribe = params.get('subscribe')
+
+        if (subscribe) {
+            if (await this.service.subscribe(subscribe)) {
+                setTimeout(() => {
+                    this.dispatchEvent(new CustomEvent('feedAdded', {
+                        detail: {
+                        url: subscribe
+                        }
+                    }))
+                    history.pushState(document.location.pathname, '', document.location.pathname)
+                }, 1)
+            }
+        }
+    }
+
+    async feedAddedHandler (event) {
+        if (await this.service.update(event.detail.url)) {
+            setTimeout(() => {
+                this.dispatchEvent(new CustomEvent('feedUpdated', {
+                    detail: {
+                        url: event.detail.url
+                    }
+                }))
+            }, 1)
         }
     }
 }
