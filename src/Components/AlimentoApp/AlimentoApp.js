@@ -1,4 +1,5 @@
 import CustomElement from '@modnes/custom-element'
+import Settings from 'alimento/Settings.js'
 import IDBHandler from 'alimento/IDBHandler.js'
 import FeedServiceFactory from 'alimento/Services/FeedServiceFactory.js'
 
@@ -6,10 +7,13 @@ import 'alimento/Components/AddSubscription/AddSubscription.js'
 import 'alimento/Components/FeedItemsList/FeedItemsList.js'
 
 class AlimentoApp extends CustomElement {
+    settings
     service
+    updatesInterval
 
     constructor () {
         super()
+        this.settings = new Settings()
         this.service = FeedServiceFactory.build()
         this.template = `
             <header>
@@ -47,6 +51,7 @@ class AlimentoApp extends CustomElement {
         await iDBHandler.init('alimento_db', 1)
         this.subscribe()
         this.update()
+        this.setUpdatesInterval()
     
         super.connectedCallback()
     }
@@ -99,6 +104,13 @@ class AlimentoApp extends CustomElement {
                 }))
             }, 1)
         }
+    }
+
+    setUpdatesInterval () {
+        this.updatesInterval = setInterval(
+            this.update.bind(this),
+            this.settings.updatesInterval.amount * Settings.IntervalTypes[this.settings.updatesInterval.type]
+        )
     }
 }
 
