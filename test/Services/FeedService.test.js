@@ -213,4 +213,33 @@ describe('Feed Service', function () {
             expect(feedItemsList.length).to.be.greaterThanOrEqual(1)
         })
     })
+
+    describe('Update All Feeds Method', function () {
+        const iDBHandler =  new IDBHandler(indexedDB)
+        const feedRepository = new FeedRepository(iDBHandler)
+        const categoryRepository = new CategoryRepository(iDBHandler)
+        const feedItemRepository = new FeedItemRepository(iDBHandler)
+        const feedService = new FeedService(feedRepository, categoryRepository, feedItemRepository)
+
+        it('Should return true', async function () {
+            const url = 'https://cyber.harvard.edu/rss/examples/rss2sample.xml'
+            const xml = await fs.readFile('test/rss2sample.xml', { encoding: 'utf8' })
+
+            fetchMock.mockGlobal().get(
+                'null/proxy?url=' + url,
+                {
+                    status: 200,
+                    body: xml,
+                    delay: 30,
+                    headers: {
+                        'Content-Type': 'application/xml'
+                    }
+                }
+            )
+            
+            const result = await feedService.updateAll()
+
+            expect(result).to.be.true
+        })
+    })
 })

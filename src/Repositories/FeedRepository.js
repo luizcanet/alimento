@@ -95,7 +95,7 @@ class FeedRepository extends BaseRepository {
         feed.webMaster = dbFeed.webMaster
         feed.pubDate = new Date(dbFeed.pubDate)
         feed.lastBuildDate = new Date(dbFeed.lastBuildDate)
-        feed.categories = dbFeed.categories.map(category => new Category(category.name))
+        feed.categories = dbFeed.categories.map(category => new Category(category))
         feed.generator = dbFeed.generator
         feed.docs = dbFeed.docs
         feed.ttl = dbFeed.ttl

@@ -51,6 +51,7 @@ class AlimentoApp extends CustomElement {
         const iDBHandler =  new IDBHandler(indexedDB)
 
         await iDBHandler.init('alimento_db', 1)
+        this.update()
     
         super.connectedCallback()
     }
@@ -66,9 +67,17 @@ class AlimentoApp extends CustomElement {
                             url: event.detail.url
                         }
                     }))
-                }, 1)
+                }, 5)
             }
         })
+    }
+
+    async update () {
+        if (await this.service.updateAll()) {
+            setTimeout(() => {
+                this.dispatchEvent(new CustomEvent('feedUpdated'))
+            }, 10)
+        }
     }
 }
 
