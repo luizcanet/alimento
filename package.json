@@ -69,7 +69,8 @@
     "exclude": [
       "src/index.js",
       "src/service-worker.js",
-      "src/Components/**/*.js"
+      "src/Components/**/*.js",
+      "src/Settings.js"
     ]
   },
   "dependencies": {
