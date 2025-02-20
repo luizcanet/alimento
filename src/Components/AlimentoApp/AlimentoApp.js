@@ -5,6 +5,7 @@ import FeedServiceFactory from 'alimento/Services/FeedServiceFactory.js'
 
 import 'alimento/Components/AddSubscription/AddSubscription.js'
 import 'alimento/Components/FeedItemsList/FeedItemsList.js'
+import 'alimento/Components/SettingsPanel/SettingsPanel.js'
 
 class AlimentoApp extends CustomElement {
     settings
@@ -41,7 +42,12 @@ class AlimentoApp extends CustomElement {
                 </h1>
                 <add-subscription />
             </header>
-            <feed-items-list></feed-items-list>
+            <main>
+                <aside>
+                    <settings-panel id="settings-panel"></settings-panel>
+                </aside>
+                <feed-items-list></feed-items-list>
+            </main>
         `
     }
 

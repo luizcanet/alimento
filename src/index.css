@@ -1,10 +1,12 @@
 @import "./Components/AlimentoApp/AlimentoApp.css";
 @import "./Components/AddSubscription/AddSubscription.css";
 @import "./Components/FeedItemsList/FeedItemsList.css";
+@import "./Components/SettingsPanel/SettingsPanel.css";
 
 :root {
     --color-white: #faf9f7;
     --color-black: #0a0700;
+    --color-grey: #747474;
     --color-blue: #063fa1;
     --color-green: #3fab3c;
     --color-yellow: #dbb714;
@@ -25,7 +27,7 @@ a {
     text-decoration: none;
 }
 
-input {
+input, select {
     background-color: hsl(from var(--background) h s calc(l * 1.25));
     border-color: hsl(from var(--foreground) h 0 calc(l * 30));
     border-radius: 0.25em;
@@ -41,10 +43,25 @@ input::placeholder {
 }
 
 button {
-    background-color: var(--color-green);
-    border-color: var(--color-green);
+    background-color: var(--color-grey);
+    border-color: var(--color-grey);
     border-radius: 0.25em;
     color: var(--color-white);
     font-size: 1em;
     padding: 0.5em;
+}
+
+button:disabled {
+    background-color: hsl(from var(--color-grey) h s calc(l + 50%));
+    border-color: hsl(from var(--color-grey) h s calc(l + 50%));
+}
+
+button[type="submit"] {
+    background-color: var(--color-green);
+    border-color: var(--color-green);
+}
+
+.form-field__label {
+    display: block;
+    margin-bottom: 0.25em;
 }
