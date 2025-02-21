@@ -1,12 +1,13 @@
 import CustomElement from '@modnes/custom-element'
-import Settings from 'alimento/Settings.js'
-import IDBHandler from 'alimento/IDBHandler.js'
-import FeedServiceFactory from 'alimento/Services/FeedServiceFactory.js'
+import Settings from '../../Settings.js'
+import IDBHandler from '../../IDBHandler.js'
+import FeedServiceFactory from '../../Services/FeedServiceFactory.js'
 import AlimentoAppTemplate from './AlimentoAppTemplate.js'
 
-import 'alimento/Components/AddSubscription/AddSubscription.js'
-import 'alimento/Components/FeedItemsList/FeedItemsList.js'
-import 'alimento/Components/SettingsPanel/SettingsPanel.js'
+import '../AddSubscription/AddSubscription.js'
+import '../FeedItemsList/FeedItemsList.js'
+import '../SettingsPanel/SettingsPanel.js'
+import '../FiltersPanel/FiltersPanel.js'
 
 class AlimentoApp extends CustomElement {
     settings
@@ -18,20 +19,7 @@ class AlimentoApp extends CustomElement {
         this.settings = new Settings()
         this.service = FeedServiceFactory.build()
         this.template = AlimentoAppTemplate
-    }
 
-    async connectedCallback () {
-        const iDBHandler =  new IDBHandler(indexedDB)
-
-        await iDBHandler.init('alimento_db', 1)
-        this.subscribe()
-        this.update()
-        this.setUpdatesInterval()
-    
-        super.connectedCallback()
-    }
-
-    init () {
         this.addEventListener('feedAdded', async event => {
             if (await this.service.update(event.detail.url)) {
                 setTimeout(() => {
@@ -44,6 +32,24 @@ class AlimentoApp extends CustomElement {
                 }, 1)
             }
         })
+        this.addEventListener('settingsChanged', event => {
+            if (event.detail.property === 'updatesInterval.amount' ||
+                event.detail.property === 'updatesInterval.type') {
+                clearInterval(this.updatesInterval)
+                this.setUpdatesInterval()
+            }
+        })
+    }
+
+    async connectedCallback () {
+        const iDBHandler =  new IDBHandler(indexedDB)
+
+        await iDBHandler.init('alimento_db', 1)
+        this.subscribe()
+        this.update()
+        this.setUpdatesInterval()
+    
+        super.connectedCallback()
     }
 
     async update () {

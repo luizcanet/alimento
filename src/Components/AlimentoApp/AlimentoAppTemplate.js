@@ -25,6 +25,7 @@ const AlimentoAppTemplate = `
         <nav class="main-menu">
             <ul>
                 <li><a href="/">Start</a></li>
+                <li><a href="#filters-panel">Filters</a></li>
                 <li><a href="#settings-panel">Settings</a></li>
             </ul>
         </nav>
@@ -33,8 +34,11 @@ const AlimentoAppTemplate = `
     <main>
         <feed-items-list></feed-items-list>
     </main>
-    <section class="settings-panel">
-        <settings-panel id="settings-panel"></settings-panel>
+    <section id="filters-panel" class="panel">
+        <filters-panel></filters-panel>
+    </section>
+    <section id="settings-panel" class="panel">
+        <settings-panel></settings-panel>
     </section>
 `
 

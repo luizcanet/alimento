@@ -9,8 +9,12 @@ class SettingsPanel extends CustomElement {
         this.dataController= new DataController(this)
         this.data = new Settings()
         this.template = SettingsPanelTemplate
-        this.addEventListener('dataUpdated', () => {
+        this.addEventListener('dataUpdated', event => {
             localStorage.setItem('settings', JSON.stringify(new Settings()))
+            this.dispatchEvent(new CustomEvent('settingsChanged', {
+                bubbles: true,
+                detail: event.detail
+            }))
         })
     }
 
