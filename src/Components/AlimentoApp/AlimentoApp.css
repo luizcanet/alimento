@@ -4,8 +4,56 @@ alimento-app {
     margin: 0 auto;
 }
 
-.alimento-logo {
+alimento-app > header {
+    background-color: var(--background);
+    padding: 0.5em 0;
+    position: sticky;
+    top: 0;
+}
+
+alimento-app > header h1 {
+    margin: 0.5em 0;
+}
+
+alimento-app .alimento-logo {
     height: 1em;
     width: 1em;
     fill: var(--color-blue);
+}
+
+alimento-app .main-menu {
+    background-color: hsl(from var(--background) h s calc(l * 1.25));
+    border-bottom: solid hsl(from var(--foreground) h 0 calc(l * 35)) 1px;
+    margin-bottom: 1em;
+}
+
+alimento-app .main-menu ul {
+    display: flex;
+    justify-content: stretch;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+alimento-app .main-menu li {
+    flex-grow: 1;
+}
+
+alimento-app .main-menu a {
+    color: var(--foreground);
+    display: block;
+    padding: 1em;
+    text-align: center;
+}
+
+@media screen and (max-width: 414px) {
+    alimento-app .main-menu {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-bottom: none;
+        border-top: solid hsl(from var(--foreground) h 0 calc(l * 35)) 1px;
+        margin-bottom: 0;
+    }
 }

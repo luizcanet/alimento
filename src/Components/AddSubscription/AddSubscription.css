@@ -5,7 +5,7 @@ add-subscription {
 add-subscription .add-subscription {
     align-items: baseline;
     display: flex;
-    margin-bottom: 1.25em;
+    margin-bottom: 0.5em;
 }
 
 add-subscription .add-subscription__label {

@@ -22,6 +22,12 @@ const AlimentoAppTemplate = `
             </svg>
             Alimento
         </h1>
+        <nav class="main-menu">
+            <ul>
+                <li><a href="/">Start</a></li>
+                <li><a href="#settings-panel">Settings</a></li>
+            </ul>
+        </nav>
         <add-subscription></add-subscription>
     </header>
     <main>
