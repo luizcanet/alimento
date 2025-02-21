@@ -19,20 +19,7 @@ class AlimentoApp extends CustomElement {
         this.settings = new Settings()
         this.service = FeedServiceFactory.build()
         this.template = AlimentoAppTemplate
-    }
 
-    async connectedCallback () {
-        const iDBHandler =  new IDBHandler(indexedDB)
-
-        await iDBHandler.init('alimento_db', 1)
-        this.subscribe()
-        this.update()
-        this.setUpdatesInterval()
-    
-        super.connectedCallback()
-    }
-
-    init () {
         this.addEventListener('feedAdded', async event => {
             if (await this.service.update(event.detail.url)) {
                 setTimeout(() => {
@@ -45,6 +32,24 @@ class AlimentoApp extends CustomElement {
                 }, 1)
             }
         })
+        this.addEventListener('settingsChanged', event => {
+            if (event.detail.property === 'updatesInterval.amount' ||
+                event.detail.property === 'updatesInterval.type') {
+                clearInterval(this.updatesInterval)
+                this.setUpdatesInterval()
+            }
+        })
+    }
+
+    async connectedCallback () {
+        const iDBHandler =  new IDBHandler(indexedDB)
+
+        await iDBHandler.init('alimento_db', 1)
+        this.subscribe()
+        this.update()
+        this.setUpdatesInterval()
+    
+        super.connectedCallback()
     }
 
     async update () {
