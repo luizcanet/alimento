@@ -33,6 +33,7 @@ class AddSubscription extends CustomElement {
 
         if (await this.service.subscribe(urlInput.value)) {
             this.dispatchEvent(new CustomEvent('feedAdded', {
+                bubbles: true,
                 detail: {
                   url: urlInput.value
                 }
