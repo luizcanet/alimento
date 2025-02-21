@@ -31,7 +31,22 @@ feed-items-list .feed-item__title {
 }
 
 feed-items-list .feed-item__description {
+    overflow: hidden;
+    max-height: 2lh;
     margin: 0.5em 0;
+}
+
+feed-items-list .feed-item__description p {
+    overflow: hidden;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    width: fit-content;
+    margin: 0;
+}
+
+feed-items-list .feed-item__description img,
+feed-items-list .feed-item__description br {
+    display: none;
 }
 
 feed-items-list .feed-item__footer {
