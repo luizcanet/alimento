@@ -1,12 +1,13 @@
 import CustomElement from '@modnes/custom-element'
-import Settings from 'alimento/Settings.js'
-import IDBHandler from 'alimento/IDBHandler.js'
-import FeedServiceFactory from 'alimento/Services/FeedServiceFactory.js'
+import Settings from '../../Settings.js'
+import IDBHandler from '../../IDBHandler.js'
+import FeedServiceFactory from '../../Services/FeedServiceFactory.js'
 import AlimentoAppTemplate from './AlimentoAppTemplate.js'
 
-import 'alimento/Components/AddSubscription/AddSubscription.js'
-import 'alimento/Components/FeedItemsList/FeedItemsList.js'
-import 'alimento/Components/SettingsPanel/SettingsPanel.js'
+import '../AddSubscription/AddSubscription.js'
+import '../FeedItemsList/FeedItemsList.js'
+import '../SettingsPanel/SettingsPanel.js'
+import '../FiltersPanel/FiltersPanel.js'
 
 class AlimentoApp extends CustomElement {
     settings

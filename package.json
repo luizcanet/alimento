@@ -70,7 +70,8 @@
       "src/index.js",
       "src/service-worker.js",
       "src/Components/**/*.js",
-      "src/Settings.js"
+      "src/Settings.js",
+      "src/Filters.js"
     ]
   },
   "dependencies": {

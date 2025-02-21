@@ -65,3 +65,32 @@ button[type="submit"] {
     display: block;
     margin-bottom: 0.25em;
 }
+
+.panel {
+    background-color: hsl(from var(--background) h s calc(l * 1.25));
+    box-shadow: -0.5em 0 0.5em hsl(from var(--background) h s calc(l - 50) / 25%);
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 414px;
+    padding: 0 1em;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    right: -414px;
+    bottom: 0;
+    opacity: 0;
+}
+
+.panel:target {
+    right: 0;
+    opacity: 1;
+}
+
+.panel hgroup {
+    background-color: hsl(from var(--background) h s calc(l * 1.25));
+    position: static;
+    top: 0;
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+}
