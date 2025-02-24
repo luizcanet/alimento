@@ -80,7 +80,7 @@ class FeedRepository extends BaseRepository {
 
             const transaction = this.iDBHandler.db.transaction(['feeds'], 'readwrite')
             const feedStore = transaction.objectStore('feeds')
-            const feedStoreRequest = feedStore.delete(feed.link)
+            const feedStoreRequest = feedStore.delete(feed.url)
 
             feedStoreRequest.onsuccess = () => { resolve(true) }
         })

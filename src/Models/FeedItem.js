@@ -17,12 +17,6 @@ class FeedItem {
     }
 
     set feedUrl(feedUrl) {
-        try {
-            new URL(feedUrl)
-        } catch {
-            throw new TypeError('Feed URL must be a valid URL')
-        }
-
         this.#feedUrl = feedUrl
     }
 

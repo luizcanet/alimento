@@ -38,7 +38,7 @@ class FeedItemRepository extends BaseRepository {
             const feedItemStore = transaction.objectStore('feedItems')
             const feedItemStoreRequest = feedItemStore.getAll()
 
-            feedItemStoreRequest.onsuccess = (event) => { 
+            feedItemStoreRequest.onsuccess = (event) => {
                 resolve(
                     event.target.result
                     .filter(dbFeedItem => dbFeedItem.feedUrl === feedUrl)

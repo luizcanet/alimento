@@ -11,6 +11,7 @@
     --color-blue: #063fa1;
     --color-green: #3fab3c;
     --color-yellow: #dbb714;
+    --color-red: #b42727;
 
     --background: var(--color-white);
     --foreground: var(--color-black);
@@ -64,6 +65,11 @@ button:disabled {
 button[type="submit"] {
     background-color: var(--color-green);
     border-color: var(--color-green);
+}
+
+button.negative {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
 }
 
 .form-field__label {

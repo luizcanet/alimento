@@ -23,12 +23,6 @@ class Feed {
     }
 
     set url(url) {
-        try {
-            new URL(url)
-        } catch {
-            throw new TypeError('URL must be a valid URL')
-        }
-
         this.#url = url
     }
 
@@ -49,12 +43,6 @@ class Feed {
     }
 
     set link(link) {
-        try {
-            new URL(link)
-        } catch {
-            throw new TypeError('Link must be a valid URL')
-        }
-
         this.#link = link
     }
 
