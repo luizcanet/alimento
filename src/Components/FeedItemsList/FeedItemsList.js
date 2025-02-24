@@ -11,7 +11,7 @@ class FeedItemsList extends CustomElement {
         super()
         this.filters = new Filters()
         this.service = FeedServiceFactory.build()
-        this.data.feeItems = []
+        this.data.feedItems = []
         this.template = FeedItemsListTemplate
     }
 

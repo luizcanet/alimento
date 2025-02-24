@@ -52,6 +52,18 @@ class FeedService {
         }
     }
 
+    async unsubscribe (feed) {
+        const feedItems = await this.#feedItemRepository.getAllByFeedUrl(feed.url)
+
+        feedItems.forEach(async feedItem => {
+            await this.#feedItemRepository.remove(feedItem)
+        })
+
+        await this.#repository.remove(feed)
+
+        return true
+    }
+
     async update (url) {
         try {
             new URL(url)

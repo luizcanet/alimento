@@ -1,4 +1,6 @@
-const FeedItemsListTemplate = data => `${data.feedItems.map(feedItem => `
+const FeedItemsListTemplate = data => `
+${(data.feedItems.length <= 0) ? '<p>No updates yet</p>' : ''}
+${data.feedItems.map(feedItem => `
     <article class="feed-item">
         ${(feedItem.link) ? `<a href="${feedItem.link}" target="_blank"  class="feed-item__link">` : '' }
             ${(feedItem.new) ? `<span class="feed-item__new">New</span>` : ''}

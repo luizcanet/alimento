@@ -1,0 +1,44 @@
+feed-subscriptions {
+    display: block;
+}
+
+feed-subscriptions .feed {
+    border-bottom: solid hsl(from var(--foreground) h 0 calc(l * 35)) 1px;
+    display: grid;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+}
+
+feed-subscriptions .feed_image {
+    background-color: var(--color-grey);
+    float: left;
+    margin: 0 0.5em 0.5em 0;
+    max-width: 120px;
+}
+
+feed-subscriptions .feed-metadata {
+    clear: left;
+    font-size: 0.75em;
+}
+
+feed-subscriptions .feed-metadata div {
+    margin-top: 0.125em;
+}
+
+feed-subscriptions .feed__label {
+    color: hsl(from var(--foreground) h 15% calc(l * 25));
+}
+
+feed-subscriptions .feed-actions {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+    grid-area: 1 / 2 / last-line / 3;
+    margin-left: 1em;
+}
+
+@media screen and (max-width: 414px) {
+    feed-subscriptions .feed h1 {
+        clear: left;
+    }
+}

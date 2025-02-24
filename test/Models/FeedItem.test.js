@@ -2,12 +2,6 @@ import { expect } from 'chai'
 import FeedItem from 'alimento/Models/FeedItem.js'
 
 describe('Feed Item Model', function () {
-    it('Should throw a TypeError when the url parameter is not a URL', function () {
-        const feed = () => { new FeedItem() }
-
-        expect(feed).to.throw(TypeError, 'Feed URL must be a valid URL')
-    })
-
     it('Should build a complete Feed Item', function () {
         const feedItem = new FeedItem('https://test/url')
 

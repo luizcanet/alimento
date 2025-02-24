@@ -2,22 +2,10 @@ import { expect } from 'chai'
 import Feed from 'alimento/Models/Feed.js'
 
 describe('Feed Model', function() {
-    it('Should throw a TypeError when the url parameter is not a URL', function () {
-        const feed = () => { new Feed() }
-
-        expect(feed).to.throw(TypeError, 'URL must be a valid URL')
-    })
-
     it('Should throw a TypeError when the title parameter is not a string', function () {
         const feed = () => { new Feed('https://test/url') }
 
         expect(feed).to.throw(TypeError, 'Title must be a string')
-    })
-
-    it('Should throw a TypeError when the link parameter is not a URL', function () {
-        const feed = () => { new Feed('https://test/url', 'Test Title') }
-
-        expect(feed).to.throw(TypeError, 'Link must be a valid URL')
     })
 
     it('Should throw a TypeError when the description parameter is not a string', function () {

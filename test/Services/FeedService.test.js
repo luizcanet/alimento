@@ -9,6 +9,7 @@ import FeedService from 'alimento/Services/FeedService.js'
 import CategoryRepository from 'alimento/Repositories/CategoryRepository.js'
 import FeedItemRepository from 'alimento/Repositories/FeedItemRepository.js'
 import FeedItem from 'alimento/Models/FeedItem.js'
+import Feed from '../../src/Models/Feed.js'
 
 var indexedDB = new IDBFactory()
 
@@ -238,6 +239,22 @@ describe('Feed Service', function () {
             )
             
             const result = await feedService.updateAll()
+
+            expect(result).to.be.true
+        })
+    })
+
+    describe('Unsubscribe Method', function () {
+        const iDBHandler =  new IDBHandler(indexedDB)
+        const feedRepository = new FeedRepository(iDBHandler)
+        const categoryRepository = new CategoryRepository(iDBHandler)
+        const feedItemRepository = new FeedItemRepository(iDBHandler)
+        const feedService = new FeedService(feedRepository, categoryRepository, feedItemRepository)
+
+        it('Should return true', async function () {
+            const feed = new Feed('https://cyber.harvard.edu/rss/examples/rss2sample.xml', 'Feed to Subscribe', 'https://feed/link', 'Feed Description')
+            
+            const result = await feedService.unsubscribe(feed)
 
             expect(result).to.be.true
         })

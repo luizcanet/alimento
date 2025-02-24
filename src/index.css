@@ -2,6 +2,7 @@
 @import "./Components/AddSubscription/AddSubscription.css";
 @import "./Components/FeedItemsList/FeedItemsList.css";
 @import "./Components/SettingsPanel/SettingsPanel.css";
+@import "./Components/FeedSubscriptions/FeedSubscriptions.css";
 
 :root {
     --color-white: #faf9f7;
@@ -10,6 +11,7 @@
     --color-blue: #063fa1;
     --color-green: #3fab3c;
     --color-yellow: #dbb714;
+    --color-red: #b42727;
 
     --background: var(--color-white);
     --foreground: var(--color-black);
@@ -37,6 +39,10 @@ input, select {
     padding: 0.5em;
 }
 
+select {
+    max-width: 100%;
+}
+
 input::placeholder {
     color: hsl(from var(--foreground) h 0 calc(l * 35));
     font-style: italic;
@@ -59,6 +65,11 @@ button:disabled {
 button[type="submit"] {
     background-color: var(--color-green);
     border-color: var(--color-green);
+}
+
+button.negative {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
 }
 
 .form-field__label {
