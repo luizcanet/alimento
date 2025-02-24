@@ -1,18 +1,23 @@
 import CustomElement from '@modnes/custom-element'
+import Router from '@modnes/router'
 import Settings from '../../Settings.js'
 import IDBHandler from '../../IDBHandler.js'
 import FeedServiceFactory from '../../Services/FeedServiceFactory.js'
 import AlimentoAppTemplate from './AlimentoAppTemplate.js'
+import Routes from './Routes.js'
 
+import '@modnes/router/anchor/index.js'
 import '../AddSubscription/AddSubscription.js'
 import '../FeedItemsList/FeedItemsList.js'
 import '../SettingsPanel/SettingsPanel.js'
 import '../FiltersPanel/FiltersPanel.js'
+import '../FeedSubscriptions/FeedSubscriptions.js'
 
 class AlimentoApp extends CustomElement {
     settings
     service
     updatesInterval
+    router
 
     constructor () {
         super()
@@ -50,6 +55,10 @@ class AlimentoApp extends CustomElement {
         this.setUpdatesInterval()
     
         super.connectedCallback()
+    }
+
+    init () {
+        this.router = new Router(this.querySelector('main'), Routes)
     }
 
     async update () {

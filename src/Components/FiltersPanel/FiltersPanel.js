@@ -53,7 +53,7 @@ class FiltersPanel extends CustomElement {
         this.insertAdjacentHTML('beforeEnd', this.template(this))
     
         this.dispatchEvent(new CustomEvent('elementRendered'))
-      }
+    }
 }
 
 customElements.define('filters-panel', FiltersPanel)

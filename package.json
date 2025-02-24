@@ -76,6 +76,7 @@
   },
   "dependencies": {
     "@modnes/custom-element": "^1.0.1",
-    "@modnes/data-controller": "^1.1.2"
+    "@modnes/data-controller": "^1.1.2",
+    "@modnes/router": "^1.1.1"
   }
 }
