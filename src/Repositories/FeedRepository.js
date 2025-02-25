@@ -1,6 +1,6 @@
-import Feed from 'alimento/Models/Feed.js'
-import Category from 'alimento/Models/Category.js'
-import BaseRepository from 'alimento/Repositories/BaseRepository.js'
+import Feed from '../Models/Feed.js'
+import Category from '../Models/Category.js'
+import BaseRepository from './BaseRepository.js'
 
 class FeedRepository extends BaseRepository {
     add (feed) {

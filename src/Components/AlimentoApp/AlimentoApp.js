@@ -16,6 +16,7 @@ import '../FeedSubscriptions/FeedSubscriptions.js'
 class AlimentoApp extends CustomElement {
     settings
     service
+    serviceWorker
     updatesInterval
     router
 
@@ -26,33 +27,35 @@ class AlimentoApp extends CustomElement {
         this.template = AlimentoAppTemplate
 
         this.addEventListener('feedAdded', async event => {
-            if (await this.service.update(event.detail.url)) {
-                setTimeout(() => {
-                    this.dispatchEvent(new CustomEvent('feedUpdated', {
-                        bubbles: true,
-                        detail: {
-                            url: event.detail.url
-                        }
-                    }))
-                }, 1)
-            }
+            await this.service.update(event.detail.url)
+            this.dispatchEvent(new CustomEvent('feedUpdated', {
+                bubbles: true,
+                detail: {
+                    url: event.detail.url
+                }
+            }))
+            Router.goTo('/subscriptions')
         })
-        this.addEventListener('settingsChanged', event => {
+        this.addEventListener('settingsChanged', async event => {
             if (event.detail.property === 'updatesInterval.amount' ||
                 event.detail.property === 'updatesInterval.type') {
+                if (this.serviceWorker.periodicSync) {
+                    await this.serviceWorker.periodicSync.unregister('update-feed')
+                }
                 clearInterval(this.updatesInterval)
-                this.setUpdatesInterval()
+                await this.setUpdatesInterval()
             }
         })
     }
 
     async connectedCallback () {
+        this.serviceWorker = await navigator.serviceWorker.ready
         const iDBHandler =  new IDBHandler(indexedDB)
 
         await iDBHandler.init('alimento_db', 1)
-        this.subscribe()
-        this.update()
-        this.setUpdatesInterval()
+        await this.subscribe()
+        await this.update()
+        await this.setUpdatesInterval()
     
         super.connectedCallback()
     }
@@ -63,29 +66,24 @@ class AlimentoApp extends CustomElement {
 
     async update () {
         if (await this.service.updateAll()) {
-            setTimeout(() => {
-                this.dispatchEvent(new CustomEvent('feedUpdated'), { bubbles: true })
-            }, 1)
-
+            this.dispatchEvent(new CustomEvent('feedUpdated'), { bubbles: true })
             this.checkForNewItems()
         }
     }
 
     async subscribe () {
         const params = new URLSearchParams(document.location.search)
-        const subscribe = params.get('subscribe')
+        const url = params.get('subscribe')
 
-        if (subscribe) {
-            if (await this.service.subscribe(subscribe)) {
-                setTimeout(() => {
-                    this.dispatchEvent(new CustomEvent('feedAdded', {
-                        bubbles: true,
-                        detail: {
-                        url: subscribe
-                        }
-                    }))
-                    history.pushState(document.location.pathname, '', document.location.pathname)
-                }, 1)
+        if (url) {
+            if (await this.service.subscribe(url)) {
+                history.pushState(document.location.pathname, '', document.location.pathname)
+                this.dispatchEvent(new CustomEvent('feedAdded', {
+                    bubbles: true,
+                    detail: {
+                        url: url
+                    }
+                }))
             }
         }
     }
@@ -98,11 +96,17 @@ class AlimentoApp extends CustomElement {
         }
     }
 
-    setUpdatesInterval () {
-        this.updatesInterval = setInterval(
-            this.update.bind(this),
-            this.settings.updatesInterval.amount * Settings.IntervalTypes[this.settings.updatesInterval.type]
-        )
+    async setUpdatesInterval () {
+        try {
+            await this.serviceWorker.periodicSync.register('update-feed' + (Settings.notifications ? '-notification' : ''), {
+                minInterval: this.settings.updatesInterval.amount * Settings.IntervalTypes[this.settings.updatesInterval.type]
+            })
+        } catch {
+            this.updatesInterval = setInterval(
+                this.update.bind(this),
+                this.settings.updatesInterval.amount * Settings.IntervalTypes[this.settings.updatesInterval.type]
+            )
+        }
     }
 }
 

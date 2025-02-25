@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Alimento - A Feed Reader Application",
   "type": "module",
-  "exports": {
-    "./*": "./src/*"
-  },
   "scripts": {
     "start": "browser-sync start --config conf/browser-sync.cjs",
     "lint": "eslint",
@@ -69,6 +66,7 @@
     "exclude": [
       "src/index.js",
       "src/service-worker.js",
+      "src/service-worker.module.js",
       "src/Components/**/*.js",
       "src/Settings.js",
       "src/Filters.js"
@@ -77,6 +75,7 @@
   "dependencies": {
     "@modnes/custom-element": "^1.0.1",
     "@modnes/data-controller": "^1.1.2",
-    "@modnes/router": "^1.1.1"
+    "@modnes/router": "^1.1.1",
+    "fast-xml-parser": "^5.0.7"
   }
 }

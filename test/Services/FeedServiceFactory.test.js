@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { IDBFactory } from 'fake-indexeddb'
-import FeedServiceFactory from 'alimento/Services/FeedServiceFactory.js'
-import FeedService from 'alimento/Services/FeedService.js'
+import FeedServiceFactory from '../../src/Services/FeedServiceFactory.js'
+import FeedService from '../../src/Services/FeedService.js'
 
 // eslint-disable-next-line no-undef
 global.indexedDB = new IDBFactory()

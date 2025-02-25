@@ -1,4 +1,4 @@
-import IDBHandler from 'alimento/IDBHandler.js'
+import IDBHandler from '../IDBHandler.js'
 
 class BaseRepository {
     #iDBHandler

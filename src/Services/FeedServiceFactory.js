@@ -1,8 +1,8 @@
-import IDBHandler from 'alimento/IDBHandler.js'
-import CategoryRepository from 'alimento/Repositories/CategoryRepository.js'
-import FeedItemRepository from 'alimento/Repositories/FeedItemRepository.js'
-import FeedRepository from 'alimento/Repositories/FeedRepository.js'
-import FeedService from 'alimento/Services/FeedService.js'
+import IDBHandler from '../IDBHandler.js'
+import CategoryRepository from '../Repositories/CategoryRepository.js'
+import FeedItemRepository from '../Repositories/FeedItemRepository.js'
+import FeedRepository from '../Repositories/FeedRepository.js'
+import FeedService from './FeedService.js'
 
 class FeedServiceFactory {
     static build () {

@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import Feed from 'alimento/Models/Feed.js'
+import Feed from '../../src/Models/Feed.js'
 
 describe('Feed Model', function() {
     it('Should throw a TypeError when the title parameter is not a string', function () {

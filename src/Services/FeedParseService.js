@@ -1,46 +1,50 @@
-import Category from 'alimento/Models/Category.js'
-import Feed from 'alimento/Models/Feed.js'
-import FeedItem from 'alimento/Models/FeedItem.js'
+/* eslint-disable no-undef */
+import Category from '../Models/Category.js'
+import Feed from '../Models/Feed.js'
+import FeedItem from '../Models/FeedItem.js'
 
 class FeedParseService {
     static parseFeed (xml, url) {
-        const parser = new DOMParser()
-        const doc = parser.parseFromString(xml, 'application/xml')
+        const parser = new XMLParser({
+            attributeNamePrefix : "@_",
+            alwaysCreateTextNode: true
+        })
+        const doc = parser.parse(xml)
         const feed = new Feed(
             url,
-            doc.querySelector('channel > title').textContent,
-            doc.querySelector('channel > link').textContent,
-            doc.querySelector('channel > description').textContent
+            doc.rss.channel.title['#text'],
+            doc.rss.channel.link['#text'],
+            doc.rss.channel.description['#text']
         )
 
-        feed.language = doc.querySelector('channel > language') ? doc.querySelector('channel > language').textContent : undefined
-        feed.copyright = doc.querySelector('channel > copyright') ? doc.querySelector('channel > copyright').textContent : undefined
-        feed.managingEditor = doc.querySelector('channel > managingEditor') ? doc.querySelector('channel > managingEditor').textContent : undefined
-        feed.webMaster = doc.querySelector('channel > webMaster') ? doc.querySelector('channel > webMaster').textContent : undefined
-        feed.pubDate = doc.querySelector('channel > pubDate') ? Date.parse(doc.querySelector('channel > pubDate').textContent) : undefined
-        feed.lastBuildDate = doc.querySelector('channel > lastBuildDate') ? Date.parse(doc.querySelector('channel > lastBuildDate').textContent) : undefined
-        feed.generator = doc.querySelector('channel > generator') ? doc.querySelector('channel > generator').textContent : undefined
-        feed.docs = doc.querySelector('channel > docs') ? doc.querySelector('channel > docs').textContent : undefined
-        feed.ttl = doc.querySelector('channel > ttl') ? Number(doc.querySelector('channel > ttl').textContent) : undefined
+        feed.language = doc.rss.channel.language ? doc.rss.channel.language['#text'] : undefined
+        feed.copyright = doc.rss.channel.copyright ? doc.rss.channel.copyright['#text'] : undefined
+        feed.managingEditor = doc.rss.channel.managingEditor ? doc.rss.channel.managingEditor['#text'] : undefined
+        feed.webMaster = doc.rss.channel.webMaster ? doc.rss.channel.webMaster['#text'] : undefined
+        feed.pubDate = doc.rss.channel.pubDate ? Date.parse(doc.rss.channel.pubDate['#text']) : undefined
+        feed.lastBuildDate = doc.rss.channel.lastBuildDate ? Date.parse(doc.rss.channel.lastBuildDate['#text']) : undefined
+        feed.generator = doc.rss.channel.generator ? doc.rss.channel.generator['#text'] : undefined
+        feed.docs = doc.rss.channel.docs ? doc.rss.channel.docs['#text'] : undefined
+        feed.ttl = doc.rss.channel.ttl ? Number(doc.rss.channel.ttl['#text']) : undefined
 
-        if (doc.querySelector('channel > category')) {
-            doc.querySelectorAll('channel > category').forEach(element => {
-                const category = new Category(element.textContent)
+        if (Array.isArray(doc.rss.channel.category)) {
+            doc.rss.channel.category.forEach(feedCategory => {
+                const category = new Category(feedCategory['#text'])
 
-                category.domain = element.getAttribute('domain') ? element.getAttribute('domain') : undefined
+                category.domain = feedCategory['@_domain']
 
                 feed.categories.push(category)
             })
         }
 
-        if (doc.querySelector('channel > image') && doc.querySelector('channel > image > url')) {
+        if (doc.rss.channel.image && doc.rss.channel.image.url) {
             feed.image = {
-                url: doc.querySelector('channel > image > url').textContent,
-                title: doc.querySelector('channel > image > title') ? doc.querySelector('channel > image > title').textContent : undefined,
-                link: doc.querySelector('channel > image > link') ? doc.querySelector('channel > image > link').textContent : undefined,
-                width: doc.querySelector('channel > image > width') ? Number(doc.querySelector('channel > image > width').textContent) : undefined,
-                height: doc.querySelector('channel > image > height') ? Number(doc.querySelector('channel > image > height').textContent) : undefined,
-                description: doc.querySelector('channel > image > description') ? doc.querySelector('channel > image > description').textContent : undefined
+                url: doc.rss.channel.image.url ? doc.rss.channel.image.url['#text'] : undefined,
+                title: doc.rss.channel.image.title ? doc.rss.channel.image.title['#text'] : undefined,
+                link: doc.rss.channel.image.link ? doc.rss.channel.image.link['#text'] : undefined,
+                width: doc.rss.channel.image.width ? doc.rss.channel.image.width['#text'] : undefined,
+                height: doc.rss.channel.image.height ? doc.rss.channel.image.height['#text'] : undefined,
+                description: doc.rss.channel.image.description ? doc.rss.channel.image.description['#text'] : undefined
             }
         }
 
@@ -49,47 +53,52 @@ class FeedParseService {
 
     static parseFeedItems (xml, url) {
         const feedItems = []
-        const parser = new DOMParser()
-        const doc = parser.parseFromString(xml, 'application/xml')
-
-        doc.querySelectorAll('item').forEach(item => {
-            const feedItem = new FeedItem(url)
-
-            feedItem.title = item.querySelector('title') ? item.querySelector('title').textContent : undefined
-            feedItem.link = item.querySelector('link') ? item.querySelector('link').textContent : undefined
-            feedItem.description = item.querySelector('description') ? item.querySelector('description').textContent : undefined
-            feedItem.author = item.querySelector('author') ? item.querySelector('author').textContent : undefined
-            feedItem.comments = item.querySelector('comments') ? item.querySelector('comments').textContent : undefined
-            feedItem.guid = item.querySelector('guid') ? item.querySelector('guid').textContent : undefined
-            feedItem.pubDate = item.querySelector('pubDate') ? Date.parse(item.querySelector('pubDate').textContent) : undefined
-            
-            if (item.querySelector('category')) {
-                item.querySelectorAll('category').forEach(element => {
-                    const category = new Category(element.textContent)
-    
-                    category.domain = element.getAttribute('domain') ? element.getAttribute('domain') : undefined
-                    
-                    feedItem.categories.push(category)
-                })
-            }
-            
-            if (item.querySelector('enclosure')) {
-                feedItem.enclosure = {
-                    url: item.querySelector('enclosure').getAttribute('url') ?? undefined,
-                    length: item.querySelector('enclosure').getAttribute('length') ?? undefined,
-                    type: item.querySelector('enclosure').getAttribute('type') ?? undefined
-                }
-            }
-            
-            if (item.querySelector('source')) {
-                feedItem.source = {
-                    url: item.querySelector('source').getAttribute('url') ?? undefined,
-                    title: item.querySelector('source').textContent
-                }
-            }
-
-            feedItems.push(feedItem)
+        const parser = new XMLParser({
+            attributeNamePrefix : "@_",
+            alwaysCreateTextNode: true
         })
+        const doc = parser.parse(xml)
+
+        if (Array.isArray(doc.rss.channel.item)) {
+            doc.rss.channel.item.forEach(item => {
+                const feedItem = new FeedItem(url)
+    
+                feedItem.title = item.title ? item.title['#text'] : undefined
+                feedItem.link = item.link ? item.link['#text'] : undefined
+                feedItem.description = item.description ? item.description['#text'] : undefined
+                feedItem.author = item.author ? item.author['#text'] : undefined
+                feedItem.comments = item.comments ? item.comments['#text'] : undefined
+                feedItem.guid = item.guid ? item.guid['#text'] : undefined
+                feedItem.pubDate = item.pubDate ? Date.parse(item.pubDate['#text']) : undefined
+                
+                if (Array.isArray(item.category)) {
+                    item.category.forEach(itemCategory => {
+                        const category = new Category(itemCategory['#text'])
+        
+                        category.domain = itemCategory['@_domain']
+        
+                        feedItem.categories.push(category)
+                    })
+                }
+                
+                if (item.enclosure) {
+                    feedItem.enclosure = {
+                        url: item.enclosure['@_url'] ?? undefined,
+                        length: item.enclosure['@_length'] ?? undefined,
+                        type: item.enclosure['@_type'] ?? undefined
+                    }
+                }
+                
+                if (item.source) {
+                    feedItem.source = {
+                        url: item.source['@_url'] ?? undefined,
+                        title: item.source['#text']
+                    }
+                }
+    
+                feedItems.push(feedItem)
+            })
+        }
 
         return feedItems
     }
