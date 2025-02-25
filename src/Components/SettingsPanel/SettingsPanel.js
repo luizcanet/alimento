@@ -18,12 +18,31 @@ class SettingsPanel extends CustomElement {
         })
     }
 
+    connectedCallback () {
+        if (Notification.permission !== 'granted') {
+            this.data.notifications = false
+        }
+
+        this.render()
+    }
+
     init () {
-        const backButton = this.querySelector('.settings-panel__back-button')
+        this.querySelector('.settings-panel__back-button')
+            .addEventListener('click', () => { history.back() })
+
+        this.querySelector('input[name="notifications"]')
+            .addEventListener('change', async event => {
+                if (event.target.checked && (Notification.permission !== 'granted')) {
+                    const permission = await Notification.requestPermission()
+
+                    this.data.notifications = (permission === 'granted')
+                    event.target.checked = (permission === 'granted')
+                }
+
+                this.render()
+            })
 
         this.dataController.bindForm(this.querySelector('.settings-panel__form'))
-
-        backButton.addEventListener('click', () => { history.back() })
     }
 }
 

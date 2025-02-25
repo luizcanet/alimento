@@ -68,15 +68,6 @@ describe('Feed Service', function () {
         const feedItemRepository = new FeedItemRepository(iDBHandler)
         const feedService = new FeedService(feedRepository, categoryRepository, feedItemRepository)
 
-        it('Should throw a Type Error when the parameter is not a valid URL', async  function () {
-            try {
-                await feedService.subscribe('URL must be a valid URL')
-            } catch (error) {
-                expect(error).to.be.instanceOf(TypeError)
-                expect(error.message).to.be.equal('URL must be a valid URL')
-            }
-        })
-
         it('Should return true', async function () {
             const url = 'https://cyber.harvard.edu/rss/examples/rss2sample.xml'
             const xml = await fs.readFile('test/rss2sample.xml', { encoding: 'utf8' })
@@ -147,15 +138,6 @@ describe('Feed Service', function () {
         const categoryRepository = new CategoryRepository(iDBHandler)
         const feedItemRepository = new FeedItemRepository(iDBHandler)
         const feedService = new FeedService(feedRepository, categoryRepository, feedItemRepository)
-
-        it('Should throw a Type Error when the parameter is not a valid URL', async  function () {
-            try {
-                await feedService.update('URL must be a valid URL')
-            } catch (error) {
-                expect(error).to.be.instanceOf(TypeError)
-                expect(error.message).to.be.equal('URL must be a valid URL')
-            }
-        })
 
         it('Should return true', async function () {
             const url = 'https://cyber.harvard.edu/rss/examples/rss2sample.xml'

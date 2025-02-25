@@ -66,6 +66,8 @@ class AlimentoApp extends CustomElement {
             setTimeout(() => {
                 this.dispatchEvent(new CustomEvent('feedUpdated'), { bubbles: true })
             }, 1)
+
+            this.checkForNewItems()
         }
     }
 
@@ -85,6 +87,14 @@ class AlimentoApp extends CustomElement {
                     history.pushState(document.location.pathname, '', document.location.pathname)
                 }, 1)
             }
+        }
+    }
+
+    async checkForNewItems () {
+        const newItems = await this.service.getNewItems()
+
+        if (newItems.length > 0 && this.settings.notifications) {
+            new Notification('New Updates!', { icon: './alimento-logo.svg' })
         }
     }
 

@@ -27,12 +27,6 @@ class FeedService {
     }
 
     async subscribe (url) {
-        try {
-            new URL(url)
-        } catch {
-            throw new TypeError('URL must be a valid URL')
-        }
-
         const response = await fetch('/proxy?url=' + url, { method: 'GET' })
 
         const feed = FeedParseService.parseFeed(await response.text(), url)
@@ -65,12 +59,6 @@ class FeedService {
     }
 
     async update (url) {
-        try {
-            new URL(url)
-        } catch {
-            throw new TypeError('URL must be a valid URL')
-        }
-
         const response = await fetch('/proxy?url=' + url, { method: 'GET' })
 
         const feedItems = FeedParseService.parseFeedItems(await response.text(), url)
@@ -97,6 +85,15 @@ class FeedService {
     async getFeedItems () {
         const feedItems = await this.#feedItemRepository.getAll()
 
+        feedItems.sort((a, b) => b.pubDate - a.pubDate)
+
+        return feedItems
+    }
+
+    async getNewItems () {
+        let feedItems = await this.#feedItemRepository.getAll()
+
+        feedItems = feedItems.filter(feedItem => feedItem.new)
         feedItems.sort((a, b) => b.pubDate - a.pubDate)
 
         return feedItems

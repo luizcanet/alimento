@@ -72,6 +72,10 @@ button.negative {
     border-color: var(--color-red);
 }
 
+.form-field {
+    margin-bottom: 1em;
+}
+
 .form-field__label {
     display: block;
     margin-bottom: 0.25em;
