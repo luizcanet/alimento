@@ -13,22 +13,22 @@ class FeedSubscriptions extends CustomElement {
         this.#repository = new FeedRepository(new IDBHandler(indexedDB))
         this.service = FeedServiceFactory.build()
         this.template = FeedSubscriptionsTemplate
-    }
-
-    connectedCallback () {
-        this.loadFeeds()
-    }
-
-    init () {
+        
         window.addEventListener('feedUpdated', () => {
             this.loadFeeds()
         })
+    }
 
+    async connectedCallback () {
+        await this.loadFeeds()
+    }
+
+    init () {
         this.querySelectorAll('.feed-actions__unsubscribe').forEach((button, key) => {
             button.addEventListener('click', async () => {
                 await this.service.unsubscribe(this.data.feeds[key])
 
-                this.loadFeeds()
+                await this.loadFeeds()
             })
         })
     }

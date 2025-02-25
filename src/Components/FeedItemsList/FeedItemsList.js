@@ -13,19 +13,17 @@ class FeedItemsList extends CustomElement {
         this.service = FeedServiceFactory.build()
         this.data.feedItems = []
         this.template = FeedItemsListTemplate
-    }
-
-    async connectedCallback () {
-        await this.loadFeedItems()
-    }
-
-    init () {
-        window.addEventListener('feedUpdated', () => {
-            this.loadFeedItems()
+        
+        window.addEventListener('feedUpdated', async () => {
+            await this.loadFeedItems()
         })
         window.addEventListener('filtersChanged', () => {
             this.loadFeedItems()
         })
+    }
+
+    async connectedCallback () {
+        await this.loadFeedItems()
     }
 
     async loadFeedItems () {

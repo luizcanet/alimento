@@ -3,6 +3,7 @@ class Settings {
         amount: 1,
         type: 'h'
     }
+    notifications = false
 
     constructor () {
         if (!Settings.instance) {

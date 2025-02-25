@@ -16,6 +16,12 @@ const SettingsPanelTemplate = data => `
                 <option value="h" ${(data.updatesInterval.type === 'h') ? 'selected': ''}>Hours</option>
             </select>
         </div>
+        <div class="form-field">
+            <label><input type="checkbox" name="notifications"
+                ${(data.notifications) ? 'checked' : ''}
+                ${(Notification.permission === 'denied') ? 'disabled' : ''}
+            /> Notifications</label>
+        </div>
     </form>
 `
 

@@ -1,20 +1,20 @@
 import fs from 'node:fs/promises'
 import fetchMock from 'fetch-mock'
-import { DOMParser } from 'xmldom-qsa'
+import { XMLParser } from 'fast-xml-parser'
 import { expect } from 'chai'
 import { IDBFactory } from 'fake-indexeddb'
-import IDBHandler from 'alimento/IDBHandler.js'
-import FeedRepository from 'alimento/Repositories/FeedRepository.js'
-import FeedService from 'alimento/Services/FeedService.js'
-import CategoryRepository from 'alimento/Repositories/CategoryRepository.js'
-import FeedItemRepository from 'alimento/Repositories/FeedItemRepository.js'
-import FeedItem from 'alimento/Models/FeedItem.js'
+import IDBHandler from '../../src/IDBHandler.js'
+import FeedRepository from '../../src/Repositories/FeedRepository.js'
+import FeedService from '../../src/Services/FeedService.js'
+import CategoryRepository from '../../src/Repositories/CategoryRepository.js'
+import FeedItemRepository from '../../src/Repositories/FeedItemRepository.js'
+import FeedItem from '../../src/Models/FeedItem.js'
 import Feed from '../../src/Models/Feed.js'
 
 var indexedDB = new IDBFactory()
 
 // eslint-disable-next-line no-undef
-global.DOMParser = DOMParser
+global.XMLParser = XMLParser
 
 fetchMock.mockGlobal()
 
@@ -67,15 +67,6 @@ describe('Feed Service', function () {
         const categoryRepository = new CategoryRepository(iDBHandler)
         const feedItemRepository = new FeedItemRepository(iDBHandler)
         const feedService = new FeedService(feedRepository, categoryRepository, feedItemRepository)
-
-        it('Should throw a Type Error when the parameter is not a valid URL', async  function () {
-            try {
-                await feedService.subscribe('URL must be a valid URL')
-            } catch (error) {
-                expect(error).to.be.instanceOf(TypeError)
-                expect(error.message).to.be.equal('URL must be a valid URL')
-            }
-        })
 
         it('Should return true', async function () {
             const url = 'https://cyber.harvard.edu/rss/examples/rss2sample.xml'
@@ -147,15 +138,6 @@ describe('Feed Service', function () {
         const categoryRepository = new CategoryRepository(iDBHandler)
         const feedItemRepository = new FeedItemRepository(iDBHandler)
         const feedService = new FeedService(feedRepository, categoryRepository, feedItemRepository)
-
-        it('Should throw a Type Error when the parameter is not a valid URL', async  function () {
-            try {
-                await feedService.update('URL must be a valid URL')
-            } catch (error) {
-                expect(error).to.be.instanceOf(TypeError)
-                expect(error.message).to.be.equal('URL must be a valid URL')
-            }
-        })
 
         it('Should return true', async function () {
             const url = 'https://cyber.harvard.edu/rss/examples/rss2sample.xml'

@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import Category from 'alimento/Models/Category.js'
+import Category from '../../src/Models/Category.js'
 
 describe('Category Model', function () {
     it('Should throw a TypeError when the name parameter is not a string', function () {

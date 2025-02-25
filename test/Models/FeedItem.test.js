@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import FeedItem from 'alimento/Models/FeedItem.js'
+import FeedItem from '../../src/Models/FeedItem.js'
 
 describe('Feed Item Model', function () {
     it('Should build a complete Feed Item', function () {

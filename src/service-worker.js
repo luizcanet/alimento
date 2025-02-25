@@ -3,12 +3,12 @@ const VERSION = '1.0.0'
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(VERSION)
     await cache.addAll(resources)
-  };
+}
   
 const putInCache = async (request, response) => {
     const cache = await caches.open(VERSION)
     await cache.put(request, response)
-};
+}
 
 const cacheFirst = async ({ request, preloadResponsePromise }) => {
     const responseFromCache = await caches.match(request)
@@ -36,7 +36,7 @@ const cacheFirst = async ({ request, preloadResponsePromise }) => {
             headers: { 'Content-Type': 'text/plain' }
         })
     }
-};
+}
 
 const enableNavigationPreload = async () => {
     if (self.registration.navigationPreload) {
@@ -82,5 +82,4 @@ self.addEventListener('fetch', (event) => {
             })
         )
     }
-
 })
