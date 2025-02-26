@@ -21,8 +21,8 @@ class VectorIcon extends CustomElement {
         this.render()
     }
 
-    attributeChangedCallback (name, oldValue, newValue) {
-        if (name === 'name') {
+    attributeChangedCallback (attributeName, oldValue, newValue) {
+        if (attributeName === 'name') {
             this.name = newValue
 
             this.render()

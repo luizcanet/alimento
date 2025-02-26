@@ -6,13 +6,13 @@ alimento-app {
 
 alimento-app > header {
     background-color: var(--background);
-    padding: 0.5em 0;
     position: sticky;
     top: 0;
 }
 
 alimento-app > header h1 {
-    margin: 0.25em 0;
+    margin: 0;
+    padding: 0.25em 0;
 }
 
 alimento-app .alimento-logo {

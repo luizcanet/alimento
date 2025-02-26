@@ -1,7 +1,10 @@
 const FiltersPanelTemplate = self => `
     <hgroup>
-        <h2>Filters</h2>
-        <button class="filters-panel__back-button">Back</button>
+        <h2><vector-icon name="filter"></vector-icon> Filters</h2>
+        <button class="filters-panel__back-button">
+            <vector-icon class="filters-panel__back-button-icon" name="chevron-left"></vector-icon>
+            <span class="filters-panel__back-button-label">Back</span>
+        </button>
     </hgroup>
     <form class="filters-panel__form">
         <div class="form-field">

@@ -95,6 +95,7 @@ button.negative {
     right: -414px;
     bottom: 0;
     opacity: 0;
+    transition: right 0.1s ease-in-out, opacity 0.1s ease-in-out;
 }
 
 .panel:target {

@@ -50,8 +50,8 @@ const AlimentoAppTemplate = `
                 </li>
             </ul>
         </nav>
-        <add-subscription></add-subscription>
     </header>
+    <add-subscription></add-subscription>
     <main></main>
     <section id="filters-panel" class="panel">
         <filters-panel></filters-panel>
