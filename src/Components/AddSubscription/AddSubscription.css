@@ -5,7 +5,7 @@ add-subscription {
 add-subscription .add-subscription {
     align-items: baseline;
     display: flex;
-    margin-bottom: 0.5em;
+    margin-bottom: 2em;
 }
 
 add-subscription .add-subscription__label {
@@ -18,10 +18,15 @@ add-subscription .add-subscription__input {
 
 add-subscription .add-subscription__button {
     margin-left: 0.5em;
+    white-space: nowrap;
 }
 
 @media screen and (max-width: 414px) {
     add-subscription .add-subscription__label {
       display: none;
+    }
+
+    add-subscription .add-subscription__button-label {
+        display: none;
     }
 }

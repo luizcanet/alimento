@@ -29,7 +29,10 @@ const checkForNewItems = async () => {
 
     if (newItems.length > 0) {
         // eslint-disable-next-line no-undef
-        showNotification('New Updates!', { icon: './alimento-logo.svg' })
+        showNotification('New Updates!', {
+            icon: './alimento-logo.svg',
+            body: newItems[0].title
+        })
     }
 }
 

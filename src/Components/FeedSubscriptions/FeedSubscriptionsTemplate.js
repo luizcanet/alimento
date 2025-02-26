@@ -13,7 +13,9 @@ const FeedSubscriptionsTemplate = (data) => `
             ${(feed.description) ? `<p class="feed_description">${feed.description}</p>` : '' }
         </hgroup>
         <div class="feed-metadata">
-            ${(feed.pubDate) ? `<div><span class="feed__label">Publication Date: </span>${feed.pubDate.toLocaleString()}</div>` : '' }
+            ${(feed.pubDate) ? `<div><span class="feed__label">
+                <vector-icon name="clock"></vector-icon>
+                Publication Date: </span>${feed.pubDate.toLocaleString()}</div>` : '' }
             ${(feed.categories.length > 0) ? `<div><span class="feed__label">Categories: </span>${feed.categories.map(category => `
             <span>
                 ${(category.domain) ? `<a href="${category.domain}" target="_blank">` : '' }
@@ -23,7 +25,10 @@ const FeedSubscriptionsTemplate = (data) => `
             `).join(' | ')}</div>` : '' }
         </div>
         <aside class="feed-actions">
-            <button class="feed-actions__unsubscribe negative">Unsubscribe</button>
+            <button class="feed-actions__unsubscribe-button negative">
+                <vector-icon class="feed-actions__unsubscribe-button-icon" name="xmark"></vector-icon>
+                <span class="feed-actions__unsubscribe-button-label">Unsubscribe</span>
+            </button>
         </aside>
     </article>
     `).join('')}

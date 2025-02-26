@@ -4,8 +4,8 @@ feed-items-list {
 
 feed-items-list .feed-item {
     border-bottom: solid hsl(from var(--foreground) h 0 calc(l * 35)) 1px;
-    margin-bottom: 0.5em;
-    padding-bottom: 0.5em;
+    margin-bottom: 2em;
+    padding-bottom: 1em;
 }
 
 feed-items-list .feed-item__link {

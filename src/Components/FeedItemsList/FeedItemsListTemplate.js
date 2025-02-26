@@ -8,7 +8,9 @@ ${data.feedItems.map(feedItem => `
             ${(feedItem.description) ? `<div class="feed-item__description">${feedItem.description}</div>` : ''}
         ${(feedItem.link) ? `</a>` : '' }
         <footer class="feed-item__footer">
-            ${(feedItem.pubDate) ? `<div><span class="feed-item__label">Date: </span>${feedItem.pubDate.toLocaleString()}</div>` : '' }
+            ${(feedItem.pubDate) ? `<div><span class="feed-item__label">
+            <vector-icon name="clock"></vector-icon>
+                Date: </span>${feedItem.pubDate.toLocaleString()}</div>` : '' }
             ${(feedItem.categories.length > 0) ? `<div><span class="feed-item__label">Categories: </span>${feedItem.categories.map(category => `
             <span>
                 ${(category.domain) ? `<a href="${category.domain}" target="_blank">` : '' }

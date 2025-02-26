@@ -24,7 +24,7 @@ class FeedSubscriptions extends CustomElement {
     }
 
     init () {
-        this.querySelectorAll('.feed-actions__unsubscribe').forEach((button, key) => {
+        this.querySelectorAll('.feed-actions__unsubscribe-button').forEach((button, key) => {
             button.addEventListener('click', async () => {
                 await this.service.unsubscribe(this.data.feeds[key])
 

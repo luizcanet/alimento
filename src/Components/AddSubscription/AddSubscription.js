@@ -21,8 +21,9 @@ class AddSubscription extends CustomElement {
                     required
                     class="add-subscription__input"
                 />
-                <button type="submit" class="add-subscription__button">
-                    Subscribe
+                <button type="submit" class="add-subscription__button" title="Subscribe">
+                    <vector-icon class="add-subscription__button-icon" name="check"></vector-icon>
+                    <span class="add-subscription__button-label">Subscribe</span>
                 </button>
             </form>
         `

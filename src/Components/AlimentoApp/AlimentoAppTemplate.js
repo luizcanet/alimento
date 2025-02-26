@@ -23,15 +23,35 @@ const AlimentoAppTemplate = `
             Alimento
         </h1>
         <nav class="main-menu">
-            <ul>
-                <li><a href="/" is="router-anchor">Feed</a></li>
-                <li><a href="#filters-panel">Filters</a></li>
-                <li><a href="/subscriptions" is="router-anchor">Subscriptions</a></li>
-                <li><a href="#settings-panel">Settings</a></li>
+            <ul class="main-menu__items">
+                <li class="main-menu__item">
+                    <a class="main-menu__item-link" href="/" is="router-anchor" title="Feed">
+                        <vector-icon class="main-menu__item-icon" name="home"></vector-icon>
+                        <span class="main-menu__item-label">Feed</span>
+                    </a>
+                </li>
+                <li class="main-menu__item">
+                    <a class="main-menu__item-link" href="#filters-panel" title="Filters">
+                        <vector-icon class="main-menu__item-icon" name="filter"></vector-icon>
+                        <span class="main-menu__item-label">Filters</span>
+                    </a>
+                </li>
+                <li class="main-menu__item">
+                    <a class="main-menu__item-link" href="/subscriptions" is="router-anchor" title="Subscriptions">
+                        <vector-icon class="main-menu__item-icon" name="list"></vector-icon>
+                        <span class="main-menu__item-label">Subscriptions</span>
+                    </a>
+                </li>
+                <li class="main-menu__item">
+                    <a class="main-menu__item-link" href="#settings-panel" title="Settings">
+                        <vector-icon class="main-menu__item-icon" name="gear"></vector-icon>
+                        <span class="main-menu__item-label">Settings</span>
+                    </a>
+                </li>
             </ul>
         </nav>
-        <add-subscription></add-subscription>
     </header>
+    <add-subscription></add-subscription>
     <main></main>
     <section id="filters-panel" class="panel">
         <filters-panel></filters-panel>
