@@ -1,7 +1,10 @@
 const SettingsPanelTemplate = data => `
     <hgroup>
-        <h2>Settings</h2>
-        <button class="settings-panel__back-button">Back</button>
+        <h2><vector-icon name="gear"></vector-icon> Settings</h2>
+        <button class="settings-panel__back-button">
+            <vector-icon class="settings-panel__back-button-icon" name="chevron-left"></vector-icon>
+            <span class="settings-panel__back-button-label">Back</span>
+        </button>
     </hgroup>
     <form class="settings-panel__form">
         <div class="form-field">
