@@ -3,6 +3,7 @@
 @import "./Components/FeedItemsList/FeedItemsList.css";
 @import "./Components/SettingsPanel/SettingsPanel.css";
 @import "./Components/FeedSubscriptions/FeedSubscriptions.css";
+@import "./Components/VectorIcon/VectorIcon.css";
 
 :root {
     --color-white: #faf9f7;

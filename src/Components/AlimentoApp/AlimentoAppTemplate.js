@@ -24,10 +24,10 @@ const AlimentoAppTemplate = `
         </h1>
         <nav class="main-menu">
             <ul>
-                <li><a href="/" is="router-anchor">Feed</a></li>
-                <li><a href="#filters-panel">Filters</a></li>
-                <li><a href="/subscriptions" is="router-anchor">Subscriptions</a></li>
-                <li><a href="#settings-panel">Settings</a></li>
+                <li><a href="/" is="router-anchor"><vector-icon name="home"></vector-icon> Feed</a></li>
+                <li><a href="#filters-panel"><vector-icon name="filter"></vector-icon> Filters</a></li>
+                <li><a href="/subscriptions" is="router-anchor"><vector-icon name="list"></vector-icon> Subscriptions</a></li>
+                <li><a href="#settings-panel"><vector-icon name="gear"></vector-icon> Settings</a></li>
             </ul>
         </nav>
         <add-subscription></add-subscription>

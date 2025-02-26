@@ -12,6 +12,7 @@ import '../FeedItemsList/FeedItemsList.js'
 import '../SettingsPanel/SettingsPanel.js'
 import '../FiltersPanel/FiltersPanel.js'
 import '../FeedSubscriptions/FeedSubscriptions.js'
+import '../VectorIcon/VectorIcon.js'
 
 class AlimentoApp extends CustomElement {
     settings
