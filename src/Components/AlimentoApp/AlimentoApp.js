@@ -93,7 +93,10 @@ class AlimentoApp extends CustomElement {
         const newItems = await this.service.getNewItems()
 
         if (newItems.length > 0 && this.settings.notifications) {
-            new Notification('New Updates!', { icon: './alimento-logo.svg' })
+            new Notification('New Updates!', {
+                icon: './alimento-logo.svg',
+                body: newItems[0].title
+            })
         }
     }
 

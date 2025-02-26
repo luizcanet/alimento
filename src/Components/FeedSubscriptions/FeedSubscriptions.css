@@ -9,6 +9,10 @@ feed-subscriptions .feed {
     padding-bottom: 0.5em;
 }
 
+feed-subscriptions .feed h1 {
+    margin-top: 0;
+}
+
 feed-subscriptions .feed_image {
     background-color: var(--color-grey);
     float: left;
@@ -40,5 +44,9 @@ feed-subscriptions .feed-actions {
 @media screen and (max-width: 414px) {
     feed-subscriptions .feed h1 {
         clear: left;
+    }
+
+    feed-subscriptions .feed-actions__unsubscribe-button-label {
+        display: none;
     }
 }
