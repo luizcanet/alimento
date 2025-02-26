@@ -27,7 +27,7 @@ alimento-app .main-menu {
     margin-bottom: 1em;
 }
 
-alimento-app .main-menu ul {
+alimento-app .main-menu__items {
     display: flex;
     justify-content: stretch;
     list-style-type: none;
@@ -35,17 +35,17 @@ alimento-app .main-menu ul {
     padding: 0;
 }
 
-alimento-app .main-menu li {
+alimento-app .main-menu__item {
     flex-grow: 1;
 }
 
-alimento-app .main-menu a {
+alimento-app .main-menu__item-link {
     display: block;
     padding: 1em;
     text-align: center;
 }
 
-alimento-app .main-menu vector-icon {
+alimento-app .main-menu__item-icon {
     width: 1.125em;
     height: 1.125em;
     vertical-align: bottom;
@@ -60,5 +60,9 @@ alimento-app .main-menu vector-icon {
         border-bottom: none;
         border-top: solid hsl(from var(--foreground) h 0 calc(l * 35)) 1px;
         margin-bottom: 0;
+    }
+
+    alimento-app .main-menu__item-label {
+        display: none;
     }
 }
