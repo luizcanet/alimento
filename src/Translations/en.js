@@ -46,6 +46,9 @@ export default {
                 ptBR: 'Brazilian Portuguese',
                 en: 'English'
             }
+        },
+        InstallButton: {
+            label: 'Install'
         }
     }
 }
