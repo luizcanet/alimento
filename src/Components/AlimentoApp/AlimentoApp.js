@@ -78,8 +78,9 @@ class AlimentoApp extends CustomElement {
 
     async update () {
         if (await this.service.updateAll()) {
-            this.dispatchEvent(new CustomEvent('feedUpdated'), { bubbles: true })
+            this.dispatchEvent(new CustomEvent('feedUpdated', { bubbles: true }))
             this.checkForNewItems()
+            this.service.clearOldItems()
         }
     }
 

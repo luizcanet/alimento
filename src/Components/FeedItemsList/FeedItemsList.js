@@ -15,9 +15,7 @@ class FeedItemsList extends CustomElement {
         this.template = FeedItemsListTemplate
         
         window.addEventListener('feedUpdated', () => {
-            setTimeout(() => {
                 this.loadFeedItems()
-            }, 100)
         })
         window.addEventListener('filtersChanged', () => {
             this.loadFeedItems()

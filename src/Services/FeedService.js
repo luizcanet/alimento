@@ -108,6 +108,20 @@ class FeedService {
 
         return true
     }
+    async clearOldItems () {
+        const feedItems = await this.#feedItemRepository.getAll()
+        const oldFeedItems = feedItems.filter(feedItem => {
+            const daysBefore = new Date(new Date().getTime() - (1000 * 60 * 60 * 48))
+
+            return feedItem.pubDate < daysBefore
+        })
+
+        oldFeedItems.forEach(async feedItem => {
+            await this.#feedItemRepository.remove(feedItem)
+        })
+
+        return true
+    }
 }
 
 export default FeedService

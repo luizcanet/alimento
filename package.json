@@ -69,7 +69,9 @@
       "src/Components/**/*.js",
       "src/Settings.js",
       "src/Filters.js",
-      "src/I18n.js"
+      "src/Internationalization.js",
+      "src/Translations/**/*.js",
+      "src/fast-xml-parser/**/*.js"
     ]
   },
   "dependencies": {
