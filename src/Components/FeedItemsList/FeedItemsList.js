@@ -14,16 +14,18 @@ class FeedItemsList extends CustomElement {
         this.data.feedItems = []
         this.template = FeedItemsListTemplate
         
-        window.addEventListener('feedUpdated', async () => {
-            await this.loadFeedItems()
+        window.addEventListener('feedUpdated', () => {
+            setTimeout(() => {
+                this.loadFeedItems()
+            }, 100)
         })
         window.addEventListener('filtersChanged', () => {
             this.loadFeedItems()
         })
     }
 
-    async connectedCallback () {
-        await this.loadFeedItems()
+    connectedCallback () {
+        this.loadFeedItems()
     }
 
     async loadFeedItems () {

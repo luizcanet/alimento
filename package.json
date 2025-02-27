@@ -41,8 +41,7 @@
     "jsdom": "^26.0.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^11.1.0",
-    "mocha-lcov-reporter": "^1.3.0",
-    "xmldom-qsa": "^1.1.3"
+    "mocha-lcov-reporter": "^1.3.0"
   },
   "mocha": {
     "require": [
@@ -69,13 +68,15 @@
       "src/service-worker.module.js",
       "src/Components/**/*.js",
       "src/Settings.js",
-      "src/Filters.js"
+      "src/Filters.js",
+      "src/I18n.js"
     ]
   },
   "dependencies": {
     "@modnes/custom-element": "^1.0.1",
-    "@modnes/data-controller": "^1.1.2",
+    "@modnes/data-controller": "^1.1.3",
     "@modnes/router": "^1.1.1",
-    "fast-xml-parser": "^5.0.7"
+    "fast-xml-parser": "^5.0.7",
+    "i18n-js": "^4.5.1"
   }
 }
