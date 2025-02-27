@@ -241,4 +241,18 @@ describe('Feed Service', function () {
             expect(result).to.be.true
         })
     })
+
+    describe('Clear Old Items Method', function () {
+        const iDBHandler =  new IDBHandler(indexedDB)
+        const feedRepository = new FeedRepository(iDBHandler)
+        const categoryRepository = new CategoryRepository(iDBHandler)
+        const feedItemRepository = new FeedItemRepository(iDBHandler)
+        const feedService = new FeedService(feedRepository, categoryRepository, feedItemRepository)
+
+        it('Should return true', async function () {
+            const result = await feedService.clearOldItems()
+
+            expect(result).to.be.true
+        })
+    })
 })
