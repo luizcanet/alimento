@@ -1,5 +1,8 @@
 import CustomElement from '@modnes/custom-element'
-import FeedServiceFactory from 'alimento/Services/FeedServiceFactory.js'
+import FeedServiceFactory from '../../Services/FeedServiceFactory.js'
+import I18n from '../../Internationalization.js'
+
+const i18n = new I18n()
 
 class AddSubscription extends CustomElement {
     service
@@ -10,7 +13,7 @@ class AddSubscription extends CustomElement {
         this.template = () => `
             <form class="add-subscription">
                 <label for="feedUrl" class="add-subscription__label">
-                    Feed URL
+                    ${i18n.t('AddSubscription.label')}
                 </label>
                 <input
                     type="url"
@@ -21,9 +24,9 @@ class AddSubscription extends CustomElement {
                     required
                     class="add-subscription__input"
                 />
-                <button type="submit" class="add-subscription__button" title="Subscribe">
+                <button type="submit" class="add-subscription__button" title="${i18n.t('AddSubscription.Subscribe')}">
                     <vector-icon class="add-subscription__button-icon" name="check"></vector-icon>
-                    <span class="add-subscription__button-label">Subscribe</span>
+                    <span class="add-subscription__button-label">${i18n.t('AddSubscription.Subscribe')}</span>
                 </button>
             </form>
         `

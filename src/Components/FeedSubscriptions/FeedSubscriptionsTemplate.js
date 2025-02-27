@@ -1,6 +1,10 @@
+import I18n from '../../Internationalization.js'
+
+const i18n = new I18n()
+
 const FeedSubscriptionsTemplate = (data) => `
-    <h1>Subscriptions</h1>
-    ${(data.feeds.length <= 0) ? '<p>No subscriptions yet</p>' : ''}
+    <h1>${i18n.t('FeedSubscriptions.title')}</h1>
+    ${(data.feeds.length <= 0) ? `<p>${i18n.t('FeedSubscriptions.NoSubscriptionsMessage')}</p>` : ''}
     ${data.feeds.map(feed => `
     <article class="feed">
         <hgroup>
@@ -15,8 +19,8 @@ const FeedSubscriptionsTemplate = (data) => `
         <div class="feed-metadata">
             ${(feed.pubDate) ? `<div><span class="feed__label">
                 <vector-icon name="clock"></vector-icon>
-                Publication Date: </span>${feed.pubDate.toLocaleString()}</div>` : '' }
-            ${(feed.categories.length > 0) ? `<div><span class="feed__label">Categories: </span>${feed.categories.map(category => `
+                ${i18n.t('FeedSubscriptions.PublicationDate')}: </span>${feed.pubDate.toLocaleString()}</div>` : '' }
+            ${(feed.categories.length > 0) ? `<div><span class="feed__label">${i18n.t('FeedSubscriptions.Categories')}: </span>${feed.categories.map(category => `
             <span>
                 ${(category.domain) ? `<a href="${category.domain}" target="_blank">` : '' }
                     ${category.name}
@@ -25,9 +29,9 @@ const FeedSubscriptionsTemplate = (data) => `
             `).join(' | ')}</div>` : '' }
         </div>
         <aside class="feed-actions">
-            <button class="feed-actions__unsubscribe-button negative">
+            <button class="feed-actions__unsubscribe-button negative" title="${i18n.t('FeedSubscriptions.Unsubscribe')}">
                 <vector-icon class="feed-actions__unsubscribe-button-icon" name="xmark"></vector-icon>
-                <span class="feed-actions__unsubscribe-button-label">Unsubscribe</span>
+                <span class="feed-actions__unsubscribe-button-label">${i18n.t('FeedSubscriptions.Unsubscribe')}</span>
             </button>
         </aside>
     </article>

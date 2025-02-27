@@ -4,6 +4,7 @@ class Settings {
         type: 'h'
     }
     notifications = false
+    language
 
     constructor () {
         if (!Settings.instance) {
@@ -16,6 +17,7 @@ class Settings {
                     }
                 }
             } else {
+                this.language = navigator.language
                 localStorage.setItem('settings', JSON.stringify(this))
             }
             

@@ -5,6 +5,7 @@ import IDBHandler from '../../IDBHandler.js'
 import FeedServiceFactory from '../../Services/FeedServiceFactory.js'
 import AlimentoAppTemplate from './AlimentoAppTemplate.js'
 import Routes from './Routes.js'
+import I18n from '../../Internationalization.js'
 
 import '@modnes/router/anchor/index.js'
 import '../AddSubscription/AddSubscription.js'
@@ -20,11 +21,13 @@ class AlimentoApp extends CustomElement {
     serviceWorker
     updatesInterval
     router
+    i18n
 
     constructor () {
         super()
         this.settings = new Settings()
         this.service = FeedServiceFactory.build()
+        this.i18n = new I18n()
         this.template = AlimentoAppTemplate
 
         this.addEventListener('feedAdded', async event => {
@@ -46,6 +49,11 @@ class AlimentoApp extends CustomElement {
                 clearInterval(this.updatesInterval)
                 await this.setUpdatesInterval()
             }
+            if (event.detail.property === 'language') {
+                document.querySelector('html').setAttribute('lang', this.settings.language)
+                this.i18n.locale = this.settings.language
+                this.render()
+            }
         })
     }
 
@@ -63,6 +71,8 @@ class AlimentoApp extends CustomElement {
 
     init () {
         this.router = new Router(this.querySelector('main'), Routes)
+
+        document.querySelector('html').setAttribute('lang', this.settings.language)
     }
 
     async update () {

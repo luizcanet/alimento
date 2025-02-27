@@ -1,4 +1,8 @@
-const AlimentoAppTemplate = `
+import I18n from '../../Internationalization.js'
+
+const i18n = new I18n()
+
+const AlimentoAppTemplate = () => `
     <header>
         <h1>
             <svg
@@ -25,27 +29,27 @@ const AlimentoAppTemplate = `
         <nav class="main-menu">
             <ul class="main-menu__items">
                 <li class="main-menu__item">
-                    <a class="main-menu__item-link" href="/" is="router-anchor" title="Feed">
+                    <a class="main-menu__item-link" href="/" is="router-anchor" title="${i18n.t('AlimentoApp.MainMenu.Feed')}">
                         <vector-icon class="main-menu__item-icon" name="home"></vector-icon>
-                        <span class="main-menu__item-label">Feed</span>
+                        <span class="main-menu__item-label">${i18n.t('AlimentoApp.MainMenu.Feed')}</span>
                     </a>
                 </li>
                 <li class="main-menu__item">
-                    <a class="main-menu__item-link" href="#filters-panel" title="Filters">
+                    <a class="main-menu__item-link" href="#filters-panel" title="${i18n.t('AlimentoApp.MainMenu.Filters')}">
                         <vector-icon class="main-menu__item-icon" name="filter"></vector-icon>
-                        <span class="main-menu__item-label">Filters</span>
+                        <span class="main-menu__item-label">${i18n.t('AlimentoApp.MainMenu.Filters')}</span>
                     </a>
                 </li>
                 <li class="main-menu__item">
-                    <a class="main-menu__item-link" href="/subscriptions" is="router-anchor" title="Subscriptions">
+                    <a class="main-menu__item-link" href="/subscriptions" is="router-anchor" title="${i18n.t('AlimentoApp.MainMenu.Subscriptions')}">
                         <vector-icon class="main-menu__item-icon" name="list"></vector-icon>
-                        <span class="main-menu__item-label">Subscriptions</span>
+                        <span class="main-menu__item-label">${i18n.t('AlimentoApp.MainMenu.Subscriptions')}</span>
                     </a>
                 </li>
                 <li class="main-menu__item">
-                    <a class="main-menu__item-link" href="#settings-panel" title="Settings">
+                    <a class="main-menu__item-link" href="#settings-panel" title="${i18n.t('AlimentoApp.MainMenu.Settings')}">
                         <vector-icon class="main-menu__item-icon" name="gear"></vector-icon>
-                        <span class="main-menu__item-label">Settings</span>
+                        <span class="main-menu__item-label">${i18n.t('AlimentoApp.MainMenu.Settings')}</span>
                     </a>
                 </li>
             </ul>
