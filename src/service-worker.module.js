@@ -3,7 +3,6 @@ import FeedServiceFactory from './Services/FeedServiceFactory.js'
 import XMLParser from './fast-xml-parser/XMLParser.js'
 import './service-worker.js'
 
-
 self.XMLParser = XMLParser
 
 const service = FeedServiceFactory.build();
@@ -29,7 +28,7 @@ const checkForNewItems = async () => {
 
     if (newItems.length > 0) {
         // eslint-disable-next-line no-undef
-        showNotification('New Updates!', {
+        showNotification('Alimento', {
             icon: './alimento-logo.svg',
             body: newItems[0].title
         })

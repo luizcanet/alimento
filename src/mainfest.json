@@ -12,5 +12,17 @@
     "scope": "/",
     "display": "standalone",
     "theme_color": "#faf9f7",
-    "background_color": "#faf9f7"
-}
+    "background_color": "#faf9f7",
+    "screenshots": [
+      {
+        "src": "screenshot-mobile.png",
+        "sizes": "375x667",
+        "form_factor": "narrow"
+      },
+      {
+        "src": "screenshot-wide.png",
+        "sizes": "976x660",
+        "form_factor": "wide"
+      }
+    ]
+  }

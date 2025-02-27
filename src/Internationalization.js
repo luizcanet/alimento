@@ -5,7 +5,7 @@ import Settings from './Settings.js'
 class Internationalization {
     constructor () {
         if (!Internationalization.instance) {
-            const settings = new Settings
+            const settings = new Settings()
             // eslint-disable-next-line no-undef
             const i18n = new I18n.I18n({
                 ...ptBR,

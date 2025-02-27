@@ -24,7 +24,7 @@ class AddSubscription extends CustomElement {
                     required
                     class="add-subscription__input"
                 />
-                <button type="submit" class="add-subscription__button" title="${i18n.t('AddSubscription.Subscribe')}">
+                <button type="submit" class="add-subscription__button button--positive" title="${i18n.t('AddSubscription.Subscribe')}">
                     <vector-icon class="add-subscription__button-icon" name="check"></vector-icon>
                     <span class="add-subscription__button-label">${i18n.t('AddSubscription.Subscribe')}</span>
                 </button>

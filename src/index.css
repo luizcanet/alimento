@@ -60,10 +60,16 @@ button {
 
 button:disabled {
     background-color: hsl(from var(--color-grey) h s calc(l + 50%));
-    border-color: hsl(from var(--color-grey) h s calc(l + 50%));
+    border: none;
 }
 
-button[type="submit"] {
+button.primary {
+    background-color: var(--color-blue);
+    border-color: var(--color-blue);
+}
+
+button[type="submit"],
+button.positive {
     background-color: var(--color-green);
     border-color: var(--color-green);
 }

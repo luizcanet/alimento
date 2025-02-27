@@ -6,7 +6,8 @@ export default {
                 Filters: 'Filters',
                 Subscriptions: 'Subscriptions',
                 Settings: 'Settings'
-            }
+            },
+            NotificationTitle: 'Alimento - New Updates!'
         },
         AddSubscription: {
             label: 'Feed URL',
@@ -45,6 +46,9 @@ export default {
                 ptBR: 'Brazilian Portuguese',
                 en: 'English'
             }
+        },
+        InstallButton: {
+            label: 'Install'
         }
     }
 }

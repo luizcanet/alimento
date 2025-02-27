@@ -10,6 +10,12 @@ alimento-app > header {
     top: 0;
 }
 
+alimento-app > header hgroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 alimento-app > header h1 {
     margin: 0;
     padding: 0.25em 0;
