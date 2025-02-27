@@ -6,7 +6,8 @@ export default {
                 Filters: 'Filtros',
                 Subscriptions: 'Inscrições',
                 Settings: 'Configurações'
-            }
+            },
+            NotificationTitle: 'Alimento - Novas Atualizações!'
         },
         AddSubscription: {
             label: 'URL do Feed',

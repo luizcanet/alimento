@@ -6,7 +6,8 @@ export default {
                 Filters: 'Filters',
                 Subscriptions: 'Subscriptions',
                 Settings: 'Settings'
-            }
+            },
+            NotificationTitle: 'Alimento - New Updates!'
         },
         AddSubscription: {
             label: 'Feed URL',
